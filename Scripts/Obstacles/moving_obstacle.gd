@@ -2,7 +2,6 @@
 extends Path2D
 
 @export var loop: bool = true
-var speed: float = 1.0
 @export var speedScale: float = 1.0
 
 @export_group("Properties")
@@ -33,7 +32,7 @@ var speed: float = 1.0
 func _ready() -> void:
 	if loop && curve != null:
 		animation_player.play("Moving")
-		set_physics_process(false)
+		#set_physics_process(false)
 	
 	apply_properties()
 
@@ -41,8 +40,8 @@ func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		apply_properties()
 
-func _physics_process(_delta: float) -> void:
-	path_follower.progress += speed
+#func _physics_process(_delta: float) -> void:
+	#path_follower.progress += 1.0
 
 
 func apply_properties() -> void:

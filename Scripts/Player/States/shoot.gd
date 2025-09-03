@@ -87,7 +87,7 @@ func shooting() -> void:
 	
 	# fire rate functionality
 	parent.runtime_vars.can_fire = false
-	get_tree().create_timer(parent.shootingTime).timeout.connect(func() -> void: parent.runtime_vars.can_fire = true)
+	get_tree().create_timer(1.0 / parent.fireRate).timeout.connect(func() -> void: parent.runtime_vars.can_fire = true)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == animationName:

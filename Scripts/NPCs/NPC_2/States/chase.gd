@@ -7,7 +7,7 @@ func enter() -> void:
 	print("[Enemy][State]: Chasing")
 	super()
 	
-	parent.status_history.append(self)
+	parent.states_history.append(self)
 	
 	cooldown_period_timer.wait_time = cooldownPeriod
 	
@@ -20,14 +20,14 @@ func process_physics(delta: float) -> NPCsState:
 	if !parent.is_on_floor():
 		parent.velocity.y += gravity * delta
 	
-	parent.player_pos = (parent.player.global_position - parent.global_position).normalized()
+	parent.player_pos = (Global.player.global_position - parent.global_position).normalized()
 	
 	if parent.player_pos > Vector2(0, 0):
 		parent.dir = 1
 	elif parent.player_pos < Vector2(0, 0):
 		parent.dir = -1
 	
-	parent.velocity.x = parent.walkSpeed * parent.dir
+	parent.velocity.x = parent.runSpeed * parent.dir
 	sprite.scale.x = abs(sprite.scale.x) * parent.dir
 	
 	parent.move_and_slide()
@@ -38,8 +38,8 @@ func process_frame(_delta: float) -> NPCsState:
 	if parent.damaged:
 		return parent.damagingState
 	
-	if parent.shoot_ray_cast.get_collider() == parent.player:
-		return parent.shootingState
+	if parent.attacking_ray_cast.get_collider() == Global.player:
+		return parent.attackingState
 	
 	if !parent.player_detected: 
 		return parent.cooldownState

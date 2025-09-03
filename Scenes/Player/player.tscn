@@ -48,7 +48,7 @@ size = Vector2(21, 34.5)
 size = Vector2(4, 88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4no11"]
-size = Vector2(41, 4)
+size = Vector2(45, 4)
 
 [sub_resource type="Animation" id="Animation_yipag"]
 resource_name = "Attack1"
@@ -360,7 +360,6 @@ damagingState = NodePath("StateMachine/Damage")
 deathState = NodePath("StateMachine/Die")
 respawningState = NodePath("StateMachine/Respawn")
 bulletScene = ExtResource("13_88yj3")
-shootingTime = 0.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2.75)
@@ -400,7 +399,7 @@ collision_layer = 4096
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSprite/InteractionDetector"]
-position = Vector2(11.5, 0)
+position = Vector2(13.5, 0)
 shape = SubResource("RectangleShape2D_4no11")
 
 [node name="GunBarrel" type="Marker2D" parent="PlayerSprite"]
@@ -628,6 +627,8 @@ visible = false
 [connection signal="body_entered" from="PlayerSprite/HitArea" to="StateMachine/Attack" method="_on_hit_area_body_entered"]
 [connection signal="body_entered" from="PlayerSprite/NPCDetector" to="." method="_on_npc_detector_body_entered"]
 [connection signal="body_exited" from="PlayerSprite/NPCDetector" to="." method="_on_npc_detector_body_exited"]
+[connection signal="area_entered" from="PlayerSprite/InteractionDetector" to="." method="_on_interaction_detector_area_entered"]
+[connection signal="area_exited" from="PlayerSprite/InteractionDetector" to="." method="_on_interaction_detector_area_exited"]
 [connection signal="body_entered" from="PlayerSprite/InteractionDetector" to="." method="_on_interaction_detector_body_entered"]
 [connection signal="body_exited" from="PlayerSprite/InteractionDetector" to="." method="_on_interaction_detector_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Land" method="_on_animation_player_animation_finished"]

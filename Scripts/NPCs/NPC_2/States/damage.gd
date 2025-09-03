@@ -17,7 +17,7 @@ func enter() -> void:
 	parent.health_bar.value -= parent.damage_value
 	parent.health = parent.health_bar.value
 	
-	previous_state = parent.status_history.back()
+	previous_state = parent.states_history.back()
 	
 	if previous_state == parent.idleState || previous_state == parent.wanderingState:
 		previous_state = parent.chasingState

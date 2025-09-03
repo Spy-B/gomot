@@ -1,17 +1,11 @@
 extends NPCsState
 
-@export var bulletScene: PackedScene
-@export_range(0, 1, 0.05) var fireRate: float = 0.5
-
-@onready var attacking_timer: Timer = $"../../Timers/AttackingTimer"
-
+@export_range(0, 100, 5, "or_greater") var hitDamage: int = 10
 
 func enter() -> void:
+	super()
 	print("[Enemy][State]: Attacking")
-	parent.status_history.append(self)
-	
-	attacking_timer.wait_time = fireRate
-	attacking_timer.start()
+	parent.states_history.append(self)
 
 func process_input(_event: InputEvent) -> NPCsState:
 	return null
@@ -20,7 +14,9 @@ func process_frame(_delta: float) -> NPCsState:
 	if parent.damaged:
 		return parent.damagingState
 	
-	if !parent.shoot_ray_cast.get_collider() == parent.player && parent.health > 0:
+	if parent.attacking_ray_cast.get_collider() == Global.player && parent.health > 0:
+		enter()
+	else:
 		return parent.idleState
 	
 	return null
@@ -34,3 +30,9 @@ func process_physics(delta: float) -> NPCsState:
 	parent.move_and_slide()
 	
 	return null
+
+
+func _on_hit_area_body_entered(body: Node2D) -> void:
+	if body == Global.player:
+		body.health -= hitDamage
+		body.camera.shake(0.1, Vector2(2.0, 2.0))

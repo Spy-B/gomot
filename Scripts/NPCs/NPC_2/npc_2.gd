@@ -9,14 +9,14 @@ var damage_value: int
 var waiting_time: float
 var player_pos: Vector2
 
-var status_history: Array = []
+var states_history: Array = []
 
 @export_group("NPC States")
 @export var idleState: NPCsState
 @export var wanderingState: NPCsState
 @export var chasingState: NPCsState
 @export var cooldownState: NPCsState
-@export var AttackingState: NPCsState
+@export var attackingState: NPCsState
 @export var talkingState: NPCsState
 @export var damagingState: NPCsState
 @export var deathState: NPCsState
@@ -42,7 +42,7 @@ var dir: int = 1
 
 @onready var g_ray_cast: RayCast2D = $Sprite2D/RayCasts/GRayCast
 @onready var w_ray_cast: RayCast2D = $Sprite2D/RayCasts/WRayCast
-@onready var shoot_ray_cast: RayCast2D = $Sprite2D/RayCasts/ShootRayCast
+@onready var attacking_ray_cast: RayCast2D = $Sprite2D/RayCasts/AttackingRayCast
 @onready var player_detector: RayCast2D = $Sprite2D/RayCasts/PlayerDetector
 
 @onready var gun_barrel: Marker2D = $Sprite2D/GunBarrel
@@ -74,7 +74,7 @@ func _ready() -> void:
 			rgs_timer.wait_time = waiting_time
 			rgs_timer.start()
 			
-			shoot_ray_cast.enabled = true
+			attacking_ray_cast.enabled = true
 			player_detector.enabled = true
 		
 		1:
@@ -89,7 +89,7 @@ func _ready() -> void:
 			
 			g_ray_cast.enabled = false
 			w_ray_cast.enabled = false
-			shoot_ray_cast.enabled = false
+			attacking_ray_cast.enabled = false
 			player_detector.enabled = false
 			
 			#player_detector.target_position.x = 15.0
@@ -109,3 +109,5 @@ func _process(delta: float) -> void:
 	if player_detector.get_collider() == Global.player:
 		player_detected = true
 		cool_down = false
+	else:
+		player_detected = false

@@ -34,7 +34,7 @@ script = ExtResource("1_8jbfx")
 visiblityNotifier = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-progress = 65285.0
+progress = 72060.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
 remote_path = NodePath("../../Obstacle")

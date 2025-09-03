@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqsku42hjp1ed"]
+[gd_scene load_steps=27 format=3 uid="uid://bqsku42hjp1ed"]
 
 [ext_resource type="Script" uid="uid://driauk14w8pk0" path="res://Scripts/NPCs/NPC_2/npc_2.gd" id="1_ss8iw"]
 [ext_resource type="Shader" uid="uid://dmn0dmxfshr1d" path="res://Resources/Shaders/hit_flash.gdshader" id="2_mel23"]
@@ -27,7 +27,7 @@ shader_parameter/flashColor = Color(1, 1, 1, 1)
 shader_parameter/flashValue = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40auk"]
-size = Vector2(27.9999, 37)
+size = Vector2(11.667, 29.1667)
 
 [sub_resource type="Animation" id="Animation_57c1o"]
 resource_name = "Attacking"
@@ -44,6 +44,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2),
 "update": 1,
 "values": [13, 14, 15, 16, 17, 18, 19]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Areas/HitArea/HitCollision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.12, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_okxx1"]
@@ -118,27 +130,45 @@ length = 0.2
 loop_mode = 1
 step = 0.05
 
+[sub_resource type="Animation" id="Animation_ss8iw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/Areas/HitArea/HitCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fbn5t"]
 _data = {
 &"Attacking": SubResource("Animation_57c1o"),
 &"Death": SubResource("Animation_okxx1"),
 &"Idle": SubResource("Animation_a4b5n"),
+&"RESET": SubResource("Animation_ss8iw"),
 &"Running": SubResource("Animation_dpk7x"),
 &"Talking": SubResource("Animation_kcs6m")
 }
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("idleState", "wanderingState", "chasingState", "cooldownState", "AttackingState", "talkingState", "damagingState", "deathState")]
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("idleState", "wanderingState", "chasingState", "cooldownState", "attackingState", "talkingState", "damagingState", "deathState")]
 collision_layer = 65536
-collision_mask = 1793
+collision_mask = 1537
 script = ExtResource("1_ss8iw")
 idleState = NodePath("NPCsStateMachine/Idle")
 wanderingState = NodePath("NPCsStateMachine/Wander")
 chasingState = NodePath("NPCsStateMachine/Chase")
 cooldownState = NodePath("NPCsStateMachine/CoolDown")
-AttackingState = NodePath("NPCsStateMachine/Attack")
+attackingState = NodePath("NPCsStateMachine/Attack")
 talkingState = NodePath("NPCsStateMachine/Talk")
 damagingState = NodePath("NPCsStateMachine/Damage")
 deathState = NodePath("NPCsStateMachine/Die")
+walkSpeed = 50
+runSpeed = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -2.5)
@@ -154,17 +184,13 @@ vframes = 6
 frame = 13
 
 [node name="Areas" type="Node2D" parent="Sprite2D"]
-position = Vector2(0, 8.5)
-rotation = 3.14159
-scale = Vector2(0.5, -0.5)
 
 [node name="HitArea" type="Area2D" parent="Sprite2D/Areas"]
-position = Vector2(-27, 0)
+position = Vector2(10.5, 1.25)
 collision_layer = 262144
 collision_mask = 256
 
 [node name="HitCollision" type="CollisionShape2D" parent="Sprite2D/Areas/HitArea"]
-position = Vector2(2.99997, -2.50002)
 shape = SubResource("RectangleShape2D_40auk")
 disabled = true
 
@@ -175,17 +201,17 @@ position = Vector2(8, 8.5)
 target_position = Vector2(0, 12)
 
 [node name="WRayCast" type="RayCast2D" parent="Sprite2D/RayCasts"]
-position = Vector2(0, 8.5)
+position = Vector2(0, 6.66667)
 target_position = Vector2(12, 0)
 collision_mask = 3
 
 [node name="AttackingRayCast" type="RayCast2D" parent="Sprite2D/RayCasts"]
-position = Vector2(0, 8.5)
-target_position = Vector2(12, 0)
+position = Vector2(0, 6.66667)
+target_position = Vector2(16.6667, 4.76837e-07)
 collision_mask = 256
 
 [node name="PlayerDetector" type="RayCast2D" parent="Sprite2D/RayCasts"]
-position = Vector2(0, 5)
+position = Vector2(0, 6.66667)
 target_position = Vector2(250, 0)
 collision_mask = 256
 
@@ -198,7 +224,6 @@ libraries = {
 }
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
 position = Vector2(0, -2.86102e-06)
 scale = Vector2(27.2, 12.8)
 
@@ -311,8 +336,8 @@ texture_progress = ExtResource("17_kntxr")
 script = ExtResource("18_bx8mn")
 metadata/_custom_type_script = "uid://lngqm66mqljp"
 
+[connection signal="body_entered" from="Sprite2D/Areas/HitArea" to="NPCsStateMachine/Attack" method="_on_hit_area_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="NPCsStateMachine/Damage" method="_on_animation_player_animation_finished"]
-[connection signal="timeout" from="Timers/AttackingTimer" to="NPCsStateMachine/Attack" method="_on_shooting_timer_timeout"]
 [connection signal="timeout" from="Timers/RGSTimer" to="NPCsStateMachine/Idle" method="_on_rgs_timer_timeout"]
 [connection signal="timeout" from="Timers/RGSTimer" to="NPCsStateMachine/Wander" method="_on_rgs_timer_timeout"]
 [connection signal="timeout" from="Timers/CooldownPeriodTimer" to="NPCsStateMachine/CoolDown" method="_on_cooldown_period_timer_timeout"]

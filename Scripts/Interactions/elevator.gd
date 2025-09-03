@@ -3,7 +3,7 @@ extends Node2D
 
 #var elevator_arrived: bool = true
 
-@export_range(0.1, 5, 0.1, "or_greater") var moveTime: float = 1.0
+@export_range(0.1, 5, 0.1, "or_greater") var speedScale: float = 1.0
 
 @export_group("Properties")
 @export var texture: Texture
@@ -64,11 +64,11 @@ func interact() -> void:
 	if self.curve != null:
 		if path_follow.progress_ratio == 0.0:
 			tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUINT)
-			tween.tween_property(path_follow, "progress_ratio", 1.0, moveTime)
+			tween.tween_property(path_follow, "progress_ratio", 1.0, 1.0 / speedScale)
 		
 		if path_follow.progress_ratio == 1.0:
 			tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUINT)
-			tween.tween_property(path_follow, "progress_ratio", 0.0, moveTime)
+			tween.tween_property(path_follow, "progress_ratio", 0.0, 1.0 / speedScale)
 
 
 func _on_elevator_activation_key_body_entered(body: Node2D) -> void:

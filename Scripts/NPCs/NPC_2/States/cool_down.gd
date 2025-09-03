@@ -5,7 +5,7 @@ extends NPCsState
 
 func enter() -> void:
 	print("[Enemy][State]: Cool Down")
-	parent.status_history.append(self)
+	parent.states_history.append(self)
 	
 	cooldown_period_timer.wait_time = cooldownPeriod
 	cooldown_period_timer.start()
@@ -26,7 +26,7 @@ func process_physics(delta: float) -> NPCsState:
 	if !parent.is_on_floor():
 		parent.velocity.y += gravity * delta
 	
-	parent.player_pos = (parent.player.global_position - parent.global_position).normalized()
+	parent.player_pos = (Global.player.global_position - parent.global_position).normalized()
 	
 	if parent.player_pos > Vector2(0, 0):
 		parent.dir = 1

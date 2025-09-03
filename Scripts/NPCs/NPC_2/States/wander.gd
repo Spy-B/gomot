@@ -1,16 +1,14 @@
 extends NPCsState
 
-@export_group("Movement")
-#@export var 
-
 var waiting_time: float
 var change_state: bool = false
+
 
 func enter() -> void:
 	print("[Enemy][State]: Wandering")
 	super()
 	
-	parent.status_history.append(self)
+	parent.states_history.append(self)
 	
 	change_state = false
 	
@@ -54,6 +52,7 @@ func process_frame(_delta: float) -> NPCsState:
 		
 	
 	return null
+
 
 func _on_rgs_timer_timeout() -> void:
 	change_state = true

@@ -6,7 +6,7 @@ func enter() -> void:
 	print("[Enemy][State]: Idle")
 	super()
 	
-	parent.status_history.append(self)
+	parent.states_history.append(self)
 	
 	change_state = false
 

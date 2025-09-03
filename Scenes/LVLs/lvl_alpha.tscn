@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://phsxnlyl6nk1"]
+[gd_scene load_steps=42 format=4 uid="uid://phsxnlyl6nk1"]
 
 [ext_resource type="Script" uid="uid://cnf78ko7r6hcr" path="res://Scripts/LVLs/lvl.gd" id="1_rbo7i"]
 [ext_resource type="PackedScene" uid="uid://clppwcfehohc5" path="res://Scenes/LVLs/Parallax_Background_2.tscn" id="2_isc4c"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://dsbijqdyjddj5" path="res://Scenes/Interactions/moving_platform.tscn" id="17_7yri8"]
 [ext_resource type="PackedScene" uid="uid://capx801wrk1vo" path="res://Scenes/Obstacles/swinging_pendulum.tscn" id="17_ee1ov"]
 [ext_resource type="Texture2D" uid="uid://bs5d76qwgx1om" path="res://Assets/VFX/ParticlePack/magic_05.png" id="17_hhrw2"]
+[ext_resource type="PackedScene" uid="uid://bqsku42hjp1ed" path="res://Scenes/NPCs/NPC_2/npc_2.tscn" id="25_j4gxf"]
 [ext_resource type="JSON" path="res://Dialogues/EzraDialogueTest.json" id="25_jrcsv"]
 [ext_resource type="PackedScene" uid="uid://dfajo8txid8ur" path="res://Scenes/Interactions/void.tscn" id="28_b3ecj"]
 
@@ -176,7 +177,7 @@ collisionShape = SubResource("CapsuleShape2D_p7leh")
 [node name="Elevator" parent="Interactions/Elevators" node_paths=PackedStringArray("activation_key") instance=ExtResource("14_jrcsv")]
 position = Vector2(96, 932)
 curve = SubResource("Curve2D_jrcsv")
-moveTime = 2.0
+speedScale = 0.8
 activation_key = NodePath("AIK")
 
 [node name="AIK" parent="Interactions/Elevators/Elevator" instance=ExtResource("15_b3ecj")]
@@ -243,6 +244,9 @@ player = NodePath("../../Player")
 
 [node name="NPC" parent="NPCs/Enemies" instance=ExtResource("13_ondqr")]
 position = Vector2(4652, 831)
+
+[node name="NPC2" parent="NPCs/Enemies" instance=ExtResource("25_j4gxf")]
+position = Vector2(1942, 917)
 
 [node name="Friendly" type="Node2D" parent="NPCs"]
 
