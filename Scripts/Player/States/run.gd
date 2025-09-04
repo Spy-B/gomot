@@ -27,8 +27,8 @@ func process_input(event: InputEvent) -> State:
 	return null
 
 func process_frame(_delta: float) -> State:
-	if Input.is_action_just_released("run"):
-		return parent.walkingState
+	#if parent.runtime_vars.is_floating:
+		#parent.runSpeed = 80
 	
 	if parent.runtime_vars.damaged:
 		parent.runtime_vars.damaged = false

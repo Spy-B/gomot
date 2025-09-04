@@ -35,22 +35,22 @@ gravity = Vector3(0, 90, 0)
 scale_curve = SubResource("7")
 color_ramp = SubResource("2")
 
-[node name="splash_particles" type="Node2D"]
+[node name="SplashParticles" type="Node2D"]
 script = ExtResource("2")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 4
-process_material = SubResource("5")
 texture = ExtResource("1")
 lifetime = 0.75
 explosiveness = 1.0
+process_material = SubResource("5")
 
 [node name="Particles2D2" type="GPUParticles2D" parent="."]
 amount = 6
-process_material = SubResource("8")
 texture = ExtResource("1")
 lifetime = 0.75
 explosiveness = 1.0
+process_material = SubResource("8")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

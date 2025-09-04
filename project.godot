@@ -211,6 +211,7 @@ move_down={
 
 [input_devices]
 
+sensors/enable_gyroscope=true
 pointing/emulate_touch_from_mouse=true
 
 [layer_names]

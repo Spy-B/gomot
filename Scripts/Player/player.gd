@@ -23,6 +23,8 @@ var runtime_vars: Dictionary = {
 	"talking_to": null,
 	"start_dialogue": false,
 	"is_in_dialogue": false,
+	"is_falling": false,
+	"is_floating": false,
 }
 
 
@@ -84,7 +86,7 @@ var dash_dir: Vector2 = Vector2.RIGHT
 @export var extraAmmo: int = 999
 
 @export var autoShoot: bool = true
-@export_range(0, 0.5, 0.02) var fireRate: float = 0.5
+@export_range(1, 10, 0.5) var fireRate: float = 2.0
 @export_range(0, 1, 0.02) var reloadingTime: float = 1.0
 
 

@@ -6,8 +6,14 @@ func enter() -> void:
 	print("[State] -> Falling")
 	super()
 	
+	parent.runtime_vars.is_falling = true
+	
 	attack_type.clear()
 	parent.runtime_vars.p_n_s_p = false
+
+func exit() -> void:
+	parent.runtime_vars.is_falling = false
+
 
 func process_input(event: InputEvent) -> State:
 	if event.is_action_pressed("jump") && parent.jumpingAbility && parent.runtime_vars.jump_points > 0:

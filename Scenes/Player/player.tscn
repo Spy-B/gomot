@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://odlluvrio0fy"]
+[gd_scene load_steps=53 format=3 uid="uid://odlluvrio0fy"]
 
 [ext_resource type="Script" uid="uid://c84khsfjk8jkw" path="res://Scripts/Player/player.gd" id="1_3wwtw"]
 [ext_resource type="Texture2D" uid="uid://df6a0s6s4n8rm" path="res://Assets/Characters/Player/red_hood.png" id="1_enipy"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://cxhhcu4ieh75a" path="res://Scripts/Player/States/die.gd" id="11_wk1dk"]
 [ext_resource type="Script" uid="uid://bk7yn64jahon1" path="res://Scripts/Player/States/dash.gd" id="12_fcwna"]
 [ext_resource type="PackedScene" uid="uid://ctncad00jdckv" path="res://Scenes/Player/bullet.tscn" id="13_88yj3"]
+[ext_resource type="Script" uid="uid://573j87l0n3we" path="res://Scripts/Player/States/floating.gd" id="14_1agin"]
 [ext_resource type="Script" uid="uid://o10qb2iw2jbp" path="res://Scripts/Player/States/reload.gd" id="14_jlfwl"]
 [ext_resource type="Script" uid="uid://dc2qoct47fdum" path="res://Scripts/Player/States/talk.gd" id="15_aqm4k"]
 [ext_resource type="Script" uid="uid://caq1yqbc8kym7" path="res://Scripts/Player/States/respawn.gd" id="15_gsya0"]
@@ -341,7 +342,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("idleState", "walkingState", "runningState", "startJumpingState", "jumpingState", "fallingState", "landingState", "dashingState", "attackingState", "shootingState", "reloadingState", "interactState", "talkingState", "damagingState", "deathState", "respawningState") groups=["Player"]]
 collision_layer = 256
-collision_mask = 458769
+collision_mask = 458801
 script = ExtResource("1_3wwtw")
 idleState = NodePath("StateMachine/Idle")
 walkingState = NodePath("StateMachine/Walk")
@@ -359,6 +360,7 @@ talkingState = NodePath("StateMachine/Talk")
 damagingState = NodePath("StateMachine/Damage")
 deathState = NodePath("StateMachine/Die")
 respawningState = NodePath("StateMachine/Respawn")
+walkingAbility = false
 bulletScene = ExtResource("13_88yj3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -445,6 +447,9 @@ animationName = &"Landing"
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource("12_fcwna")
 animationName = &"Idle"
+
+[node name="Floating" type="Node" parent="StateMachine"]
+script = ExtResource("14_1agin")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("9_6ut1u")

@@ -48,7 +48,7 @@ func process_physics(_delta: float) -> State:
 		if !movement && parent.is_on_floor():
 			return parent.idleState
 		
-		if Input.is_action_pressed("run"):
+		if Input.is_action_pressed("run") || !parent.walkingAbility:
 			return parent.runningState
 		
 		return parent.walkingState
