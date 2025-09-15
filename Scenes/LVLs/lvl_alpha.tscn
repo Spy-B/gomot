@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://phsxnlyl6nk1"]
+[gd_scene load_steps=44 format=4 uid="uid://phsxnlyl6nk1"]
 
 [ext_resource type="Script" uid="uid://cnf78ko7r6hcr" path="res://Scripts/LVLs/lvl.gd" id="1_rbo7i"]
 [ext_resource type="PackedScene" uid="uid://clppwcfehohc5" path="res://Scenes/LVLs/Parallax_Background_2.tscn" id="2_isc4c"]
@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bcgg47piyu1ix" path="res://Assets/VFX/ParticlePack/spark_07.png" id="13_6ii1r"]
 [ext_resource type="Texture2D" uid="uid://cdjisxsv505md" path="res://Assets/VFX/ParticlePack/magic_03.png" id="13_ee1ov"]
 [ext_resource type="PackedScene" uid="uid://dby608arrc55k" path="res://Scenes/Interactions/camera_manager.tscn" id="13_f2wfy"]
-[ext_resource type="PackedScene" uid="uid://cmdo4y67uis4f" path="res://Scenes/NPCs/NPC_1/npc_1.tscn" id="13_ondqr"]
+[ext_resource type="PackedScene" uid="uid://cmdo4y67uis4f" path="res://Scenes/NPCs/NPC1/npc_1.tscn" id="13_ondqr"]
 [ext_resource type="PackedScene" uid="uid://dls1ol8ea37ht" path="res://Scenes/Obstacles/moving_obstacle.tscn" id="14_6ii1r"]
 [ext_resource type="Texture2D" uid="uid://bm1b02r7k7rvt" path="res://Assets/VFX/ParticlePack/circle_03.png" id="14_ee1ov"]
 [ext_resource type="PackedScene" uid="uid://c5jykne82vv5x" path="res://Scenes/Interactions/elevator.tscn" id="14_jrcsv"]
@@ -27,9 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://dsbijqdyjddj5" path="res://Scenes/Interactions/moving_platform.tscn" id="17_7yri8"]
 [ext_resource type="PackedScene" uid="uid://capx801wrk1vo" path="res://Scenes/Obstacles/swinging_pendulum.tscn" id="17_ee1ov"]
 [ext_resource type="Texture2D" uid="uid://bs5d76qwgx1om" path="res://Assets/VFX/ParticlePack/magic_05.png" id="17_hhrw2"]
-[ext_resource type="PackedScene" uid="uid://bqsku42hjp1ed" path="res://Scenes/NPCs/NPC_2/npc_2.tscn" id="25_j4gxf"]
-[ext_resource type="JSON" path="res://Dialogues/EzraDialogueTest.json" id="25_jrcsv"]
 [ext_resource type="PackedScene" uid="uid://dfajo8txid8ur" path="res://Scenes/Interactions/void.tscn" id="28_b3ecj"]
+[ext_resource type="Texture2D" uid="uid://du5scffh4g2tm" path="res://Assets/Water_particle_1.png" id="29_j4gxf"]
 
 [sub_resource type="Curve2D" id="Curve2D_rbo7i"]
 _data = {
@@ -75,6 +74,15 @@ radius = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fm782"]
 size = Vector2(20, 978)
+
+[sub_resource type="Curve2D" id="Curve2D_ondqr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 416, 608, 0, 0, 0, 0, 416, 880)
+}
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qekjm"]
+radius = 15.1
 
 [node name="LVLAlpha" type="Node2D"]
 script = ExtResource("1_rbo7i")
@@ -250,17 +258,9 @@ player = NodePath("../../Player")
 [node name="Enemies" type="Node2D" parent="NPCs"]
 
 [node name="NPC" parent="NPCs/Enemies" instance=ExtResource("13_ondqr")]
-position = Vector2(4652, 831)
-
-[node name="NPC2" parent="NPCs/Enemies" instance=ExtResource("25_j4gxf")]
-position = Vector2(1942, 917)
+position = Vector2(948, 887)
 
 [node name="Friendly" type="Node2D" parent="NPCs"]
-
-[node name="NPC" parent="NPCs/Friendly" instance=ExtResource("13_ondqr")]
-position = Vector2(864, 936)
-NpcType = 1
-dialogueJson = ExtResource("25_jrcsv")
 
 [node name="Player" parent="." node_paths=PackedStringArray("checkpointManager") instance=ExtResource("14_qekjm")]
 unique_name_in_owner = true
@@ -294,8 +294,16 @@ shape = SubResource("RectangleShape2D_fm782")
 position = Vector2(0, 1500)
 
 [node name="NightFilter" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.705882, 0.705882, 0.705882, 1)
 
 [node name="TimeScaleTimer" type="Timer" parent="."]
+
+[node name="MovingObstacle" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_6ii1r")]
+curve = SubResource("Curve2D_ondqr")
+texture = ExtResource("29_j4gxf")
+textureScale = 1.72
+collisionShape = SubResource("CircleShape2D_qekjm")
+player = NodePath("../Player")
 
 [connection signal="timeout" from="TimeScaleTimer" to="." method="_on_time_scale_timer_timeout"]

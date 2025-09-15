@@ -10,7 +10,6 @@ var parent: CharacterBody2D
 var sprite: Sprite2D
 var animation: AnimationPlayer
 var gun_barrel: Marker2D
-var rgs_timer: Timer
 
 
 func enter() -> void:

@@ -7,9 +7,6 @@ var parent: CharacterBody2D
 var animation: AnimationPlayer
 var gun_barrel: Marker2D
 
-var coyote_timer: Timer
-var jump_buffer_timer: Timer
-
 #var state_animation
 
 func enter() -> void:

@@ -1,33 +1,34 @@
-[gd_scene load_steps=53 format=3 uid="uid://odlluvrio0fy"]
+[gd_scene load_steps=54 format=3 uid="uid://odlluvrio0fy"]
 
 [ext_resource type="Script" uid="uid://c84khsfjk8jkw" path="res://Scripts/Player/player.gd" id="1_3wwtw"]
 [ext_resource type="Texture2D" uid="uid://df6a0s6s4n8rm" path="res://Assets/Characters/Player/red_hood.png" id="1_enipy"]
 [ext_resource type="Shader" uid="uid://dmn0dmxfshr1d" path="res://Resources/Shaders/hit_flash.gdshader" id="2_qr1w5"]
 [ext_resource type="PackedScene" uid="uid://cm04fvl3igrbw" path="res://Scenes/Player/state_machine.tscn" id="3_vytom"]
-[ext_resource type="Script" uid="uid://cybju0gm13lo8" path="res://Scripts/Player/States/idle.gd" id="4_g7jtl"]
-[ext_resource type="Script" uid="uid://coddbe7btvcrq" path="res://Scripts/Player/States/walk.gd" id="5_jpb0k"]
-[ext_resource type="Script" uid="uid://byf7ryu8crct7" path="res://Scripts/Player/States/run.gd" id="6_msey6"]
-[ext_resource type="Script" uid="uid://b7eihklgcn423" path="res://Scripts/Player/States/start_jump.gd" id="7_6kwnr"]
-[ext_resource type="Script" uid="uid://178dipm3233o" path="res://Scripts/Player/States/jump.gd" id="7_ncnvn"]
-[ext_resource type="Script" uid="uid://nm36cwca46sv" path="res://Scripts/Player/States/fall.gd" id="8_aob0q"]
-[ext_resource type="Script" uid="uid://da1r8os1lqcvy" path="res://Scripts/Player/States/attack.gd" id="9_6ut1u"]
-[ext_resource type="Script" uid="uid://dxvf4khhnwias" path="res://Scripts/Player/States/land.gd" id="9_8wtju"]
-[ext_resource type="Script" uid="uid://dgblu2jsnjcwy" path="res://Scripts/Player/States/shoot.gd" id="10_xqoms"]
-[ext_resource type="Script" uid="uid://cxhhcu4ieh75a" path="res://Scripts/Player/States/die.gd" id="11_wk1dk"]
-[ext_resource type="Script" uid="uid://bk7yn64jahon1" path="res://Scripts/Player/States/dash.gd" id="12_fcwna"]
+[ext_resource type="Script" uid="uid://cybju0gm13lo8" path="res://Scripts/Player/UpperBodyStates/idle.gd" id="4_g7jtl"]
+[ext_resource type="Script" uid="uid://coddbe7btvcrq" path="res://Scripts/Player/UpperBodyStates/walk.gd" id="5_jpb0k"]
+[ext_resource type="Script" uid="uid://byf7ryu8crct7" path="res://Scripts/Player/UpperBodyStates/run.gd" id="6_msey6"]
+[ext_resource type="Script" uid="uid://b7eihklgcn423" path="res://Scripts/Player/UpperBodyStates/start_jump.gd" id="7_6kwnr"]
+[ext_resource type="Script" uid="uid://178dipm3233o" path="res://Scripts/Player/UpperBodyStates/jump.gd" id="7_ncnvn"]
+[ext_resource type="Script" uid="uid://nm36cwca46sv" path="res://Scripts/Player/UpperBodyStates/fall.gd" id="8_aob0q"]
+[ext_resource type="Script" uid="uid://da1r8os1lqcvy" path="res://Scripts/Player/UpperBodyStates/attack.gd" id="9_6ut1u"]
+[ext_resource type="Script" uid="uid://dxvf4khhnwias" path="res://Scripts/Player/UpperBodyStates/land.gd" id="9_8wtju"]
+[ext_resource type="Script" uid="uid://dgblu2jsnjcwy" path="res://Scripts/Player/UpperBodyStates/shoot.gd" id="10_xqoms"]
+[ext_resource type="Script" uid="uid://cxhhcu4ieh75a" path="res://Scripts/Player/UpperBodyStates/die.gd" id="11_wk1dk"]
+[ext_resource type="Script" uid="uid://bk7yn64jahon1" path="res://Scripts/Player/UpperBodyStates/dash.gd" id="12_fcwna"]
 [ext_resource type="PackedScene" uid="uid://ctncad00jdckv" path="res://Scenes/Player/bullet.tscn" id="13_88yj3"]
-[ext_resource type="Script" uid="uid://573j87l0n3we" path="res://Scripts/Player/States/floating.gd" id="14_1agin"]
-[ext_resource type="Script" uid="uid://o10qb2iw2jbp" path="res://Scripts/Player/States/reload.gd" id="14_jlfwl"]
-[ext_resource type="Script" uid="uid://dc2qoct47fdum" path="res://Scripts/Player/States/talk.gd" id="15_aqm4k"]
-[ext_resource type="Script" uid="uid://caq1yqbc8kym7" path="res://Scripts/Player/States/respawn.gd" id="15_gsya0"]
-[ext_resource type="Script" uid="uid://brqsr0b2h4c1l" path="res://Scripts/Player/States/interact.gd" id="16_4no11"]
-[ext_resource type="Script" uid="uid://qjnw7dalx0dg" path="res://Scripts/Player/States/damage.gd" id="16_rqdc0"]
+[ext_resource type="Script" uid="uid://573j87l0n3we" path="res://Scripts/Player/UpperBodyStates/floating.gd" id="14_1agin"]
+[ext_resource type="Script" uid="uid://o10qb2iw2jbp" path="res://Scripts/Player/UpperBodyStates/reload.gd" id="14_jlfwl"]
+[ext_resource type="Script" uid="uid://dc2qoct47fdum" path="res://Scripts/Player/UpperBodyStates/talk.gd" id="15_aqm4k"]
+[ext_resource type="Script" uid="uid://caq1yqbc8kym7" path="res://Scripts/Player/UpperBodyStates/respawn.gd" id="15_gsya0"]
+[ext_resource type="Script" uid="uid://brqsr0b2h4c1l" path="res://Scripts/Player/UpperBodyStates/interact.gd" id="16_4no11"]
+[ext_resource type="Script" uid="uid://qjnw7dalx0dg" path="res://Scripts/Player/UpperBodyStates/damage.gd" id="16_rqdc0"]
 [ext_resource type="Script" uid="uid://8gqr7prnhgj" path="res://Scripts/Player/ui.gd" id="17_1w6uu"]
 [ext_resource type="Texture2D" uid="uid://ct1nomm0fe8i1" path="res://Assets/UI/Keyboard_E_Icon.png" id="18_hnuln"]
 [ext_resource type="LabelSettings" uid="uid://cppao4gwki6g6" path="res://Resources/Labels/ui_label_settings.tres" id="19_rcvs5"]
 [ext_resource type="Texture2D" uid="uid://b8fehev3f8hhn" path="res://Assets/UI/Health_Bar_(Under).png" id="21_jincj"]
 [ext_resource type="LabelSettings" uid="uid://ck3j7eyrm2267" path="res://Resources/Labels/dialogues_label_settings.tres" id="21_ur3l4"]
 [ext_resource type="Texture2D" uid="uid://dhc3fr0uxguvh" path="res://Assets/UI/Health_Bar_(Over).png" id="22_rqdc0"]
+[ext_resource type="Script" uid="uid://cfat8di0wf1l" path="res://Scripts/Player/lower_body_machine.gd" id="23_2jnj1"]
 [ext_resource type="Texture2D" uid="uid://b26eqjgoo246y" path="res://Assets/UI/Health_Bar_(Progress).png" id="23_qr1w5"]
 [ext_resource type="SpriteFrames" uid="uid://8j0a8xad6srp" path="res://Resources/loading_anime.tres" id="26_bmb2s"]
 [ext_resource type="PackedScene" uid="uid://ddttrsm0vcrxa" path="res://Scenes/UIs/phone_ui.tscn" id="26_ythyg"]
@@ -58,7 +59,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -70,7 +71,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite/HitArea/CollisionShape2D:disabled")
+tracks/1/path = NodePath("UpperBodySprite/HitArea/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -87,7 +88,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -99,7 +100,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite/HitArea/CollisionShape2D:disabled")
+tracks/1/path = NodePath("UpperBodySprite/HitArea/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -116,7 +117,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -128,7 +129,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite/HitArea/CollisionShape2D:disabled")
+tracks/1/path = NodePath("UpperBodySprite/HitArea/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -145,7 +146,7 @@ step = 0.04
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -187,7 +188,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -205,7 +206,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -223,7 +224,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -240,7 +241,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -258,7 +259,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:material:shader_parameter/flashValue")
+tracks/0/path = NodePath("UpperBodySprite:material:shader_parameter/flashValue")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -276,7 +277,7 @@ step = 0.04
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -293,7 +294,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -310,7 +311,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/path = NodePath("UpperBodySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -344,22 +345,22 @@ _data = {
 collision_layer = 256
 collision_mask = 458801
 script = ExtResource("1_3wwtw")
-idleState = NodePath("StateMachine/Idle")
-walkingState = NodePath("StateMachine/Walk")
-runningState = NodePath("StateMachine/Run")
-startJumpingState = NodePath("StateMachine/StartJump")
-jumpingState = NodePath("StateMachine/Jump")
-fallingState = NodePath("StateMachine/Fall")
-landingState = NodePath("StateMachine/Land")
-dashingState = NodePath("StateMachine/Dash")
-attackingState = NodePath("StateMachine/Attack")
-shootingState = NodePath("StateMachine/Shoot")
-reloadingState = NodePath("StateMachine/Reload")
-interactState = NodePath("StateMachine/Interact")
-talkingState = NodePath("StateMachine/Talk")
-damagingState = NodePath("StateMachine/Damage")
-deathState = NodePath("StateMachine/Die")
-respawningState = NodePath("StateMachine/Respawn")
+idleState = NodePath("UpperBodyMachine/Idle")
+walkingState = NodePath("UpperBodyMachine/Walk")
+runningState = NodePath("UpperBodyMachine/Run")
+startJumpingState = NodePath("UpperBodyMachine/StartJump")
+jumpingState = NodePath("UpperBodyMachine/Jump")
+fallingState = NodePath("UpperBodyMachine/Fall")
+landingState = NodePath("UpperBodyMachine/Land")
+dashingState = NodePath("UpperBodyMachine/Dash")
+attackingState = NodePath("UpperBodyMachine/Attack")
+shootingState = NodePath("UpperBodyMachine/Shoot")
+reloadingState = NodePath("UpperBodyMachine/Reload")
+interactState = NodePath("UpperBodyMachine/Interact")
+talkingState = NodePath("UpperBodyMachine/Talk")
+damagingState = NodePath("UpperBodyMachine/Damage")
+deathState = NodePath("UpperBodyMachine/Die")
+respawningState = NodePath("UpperBodyMachine/Respawn")
 walkingAbility = false
 bulletScene = ExtResource("13_88yj3")
 
@@ -367,7 +368,7 @@ bulletScene = ExtResource("13_88yj3")
 position = Vector2(0, -2.75)
 shape = SubResource("RectangleShape2D_bmxon")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
+[node name="UpperBodySprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ythyg")
 position = Vector2(0, -16)
 texture = ExtResource("1_enipy")
@@ -375,114 +376,139 @@ flip_h = true
 hframes = 12
 vframes = 11
 
-[node name="HitArea" type="Area2D" parent="PlayerSprite"]
+[node name="HitArea" type="Area2D" parent="UpperBodySprite"]
 position = Vector2(17, 16)
 collision_layer = 256
 collision_mask = 196608
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSprite/HitArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperBodySprite/HitArea"]
 position = Vector2(1.5, -2.75)
 shape = SubResource("RectangleShape2D_omcea")
 disabled = true
 
-[node name="NPCDetector" type="Area2D" parent="PlayerSprite"]
+[node name="NPCDetector" type="Area2D" parent="UpperBodySprite"]
 position = Vector2(0, 16)
 collision_layer = 2048
 collision_mask = 16777216
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSprite/NPCDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperBodySprite/NPCDetector"]
 position = Vector2(4, 0)
 rotation = -1.5708
 shape = SubResource("RectangleShape2D_2ahak")
 
-[node name="InteractionDetector" type="Area2D" parent="PlayerSprite"]
+[node name="InteractionDetector" type="Area2D" parent="UpperBodySprite"]
 position = Vector2(0, 16)
 collision_layer = 4096
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSprite/InteractionDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperBodySprite/InteractionDetector"]
 position = Vector2(13.5, 0)
 shape = SubResource("RectangleShape2D_4no11")
 
-[node name="GunBarrel" type="Marker2D" parent="PlayerSprite"]
+[node name="GunBarrel" type="Marker2D" parent="UpperBodySprite"]
 position = Vector2(9, 14)
+
+[node name="LowerBodySprite" type="Sprite2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_fqlx5")
 }
 
-[node name="StateMachine" parent="." node_paths=PackedStringArray("startingState") instance=ExtResource("3_vytom")]
+[node name="UpperBodyMachine" parent="." node_paths=PackedStringArray("startingState") instance=ExtResource("3_vytom")]
+editor_description = "Attacking, Interacting... State Machine"
 startingState = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("4_g7jtl")
 animationName = &"Idle"
 
-[node name="Walk" type="Node" parent="StateMachine"]
+[node name="Walk" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("5_jpb0k")
 animationName = &"Running"
 
-[node name="Run" type="Node" parent="StateMachine"]
+[node name="Run" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("6_msey6")
 animationName = &"Running"
 
-[node name="StartJump" type="Node" parent="StateMachine"]
+[node name="StartJump" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("7_6kwnr")
 wait_time = 0.05
 animationName = &"StartJumping"
 
-[node name="Jump" type="Node" parent="StateMachine"]
+[node name="Jump" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("7_ncnvn")
 animationName = &"Jumping"
 
-[node name="Fall" type="Node" parent="StateMachine"]
+[node name="Fall" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("8_aob0q")
 animationName = &"Falling"
 
-[node name="Land" type="Node" parent="StateMachine"]
+[node name="Land" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("9_8wtju")
 animationName = &"Landing"
 
-[node name="Dash" type="Node" parent="StateMachine"]
+[node name="Dash" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("12_fcwna")
 animationName = &"Idle"
 
-[node name="Floating" type="Node" parent="StateMachine"]
+[node name="Floating" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("14_1agin")
 
-[node name="Attack" type="Node" parent="StateMachine"]
+[node name="Attack" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("9_6ut1u")
 comboAttacks = Array[String](["Attack1", "Attack2", "Attack3"])
 animationName = &"Attack1"
 
-[node name="Shoot" type="Node" parent="StateMachine"]
+[node name="Shoot" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("10_xqoms")
 animationName = &"Shooting"
 
-[node name="Reload" type="Node" parent="StateMachine"]
+[node name="Reload" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("14_jlfwl")
 animationName = &"Idle"
 
-[node name="Interact" type="Node" parent="StateMachine"]
+[node name="Interact" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("16_4no11")
 animationName = &"Idle"
 
-[node name="Talk" type="Node" parent="StateMachine"]
+[node name="Talk" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("15_aqm4k")
 animationName = &"Idle"
 
-[node name="Damage" type="Node" parent="StateMachine"]
+[node name="Damage" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("16_rqdc0")
 animationName = &"Death"
 
-[node name="Die" type="Node" parent="StateMachine"]
+[node name="Die" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("11_wk1dk")
 animationName = &"Death"
 
-[node name="Respawn" type="Node" parent="StateMachine"]
+[node name="Respawn" type="Node" parent="UpperBodyMachine"]
 script = ExtResource("15_gsya0")
 animationName = &"Idle"
+
+[node name="LowerBodyMachine" parent="." instance=ExtResource("3_vytom")]
+editor_description = "The Movement State Machine"
+script = ExtResource("23_2jnj1")
+
+[node name="Idle" type="Node" parent="LowerBodyMachine"]
+
+[node name="Walk" type="Node" parent="LowerBodyMachine"]
+
+[node name="Run" type="Node" parent="LowerBodyMachine"]
+
+[node name="StartJump" type="Node" parent="LowerBodyMachine"]
+
+[node name="Jump" type="Node" parent="LowerBodyMachine"]
+
+[node name="Fall" type="Node" parent="LowerBodyMachine"]
+
+[node name="Land" type="Node" parent="LowerBodyMachine"]
+
+[node name="Dash" type="Node" parent="LowerBodyMachine"]
+
+[node name="Floating" type="Node" parent="LowerBodyMachine"]
 
 [node name="Timers" type="Node" parent="."]
 
@@ -629,18 +655,18 @@ phoneUI = NodePath("../../PhoneUI")
 [node name="FeedEffect" parent="UI" instance=ExtResource("29_rukb4")]
 visible = false
 
-[connection signal="body_entered" from="PlayerSprite/HitArea" to="StateMachine/Attack" method="_on_hit_area_body_entered"]
-[connection signal="body_entered" from="PlayerSprite/NPCDetector" to="." method="_on_npc_detector_body_entered"]
-[connection signal="body_exited" from="PlayerSprite/NPCDetector" to="." method="_on_npc_detector_body_exited"]
-[connection signal="area_entered" from="PlayerSprite/InteractionDetector" to="." method="_on_interaction_detector_area_entered"]
-[connection signal="area_exited" from="PlayerSprite/InteractionDetector" to="." method="_on_interaction_detector_area_exited"]
-[connection signal="body_entered" from="PlayerSprite/InteractionDetector" to="." method="_on_interaction_detector_body_entered"]
-[connection signal="body_exited" from="PlayerSprite/InteractionDetector" to="." method="_on_interaction_detector_body_exited"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Land" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Shoot" method="_on_animation_player_animation_finished"]
-[connection signal="timeout" from="Timers/StartJumpTimer" to="StateMachine/StartJump" method="_on_start_jump_timer_timeout"]
-[connection signal="timeout" from="Timers/QuitStateTimer" to="StateMachine/Attack" method="_on_melee_combo_timer_timeout"]
-[connection signal="timeout" from="Timers/ReloadingTimer" to="StateMachine/Reload" method="_on_reloading_timer_timeout"]
-[connection signal="timeout" from="Timers/RespawnTimer" to="StateMachine/Die" method="_on_respawn_timer_timeout"]
+[connection signal="body_entered" from="UpperBodySprite/HitArea" to="UpperBodyMachine/Attack" method="_on_hit_area_body_entered"]
+[connection signal="body_entered" from="UpperBodySprite/NPCDetector" to="." method="_on_npc_detector_body_entered"]
+[connection signal="body_exited" from="UpperBodySprite/NPCDetector" to="." method="_on_npc_detector_body_exited"]
+[connection signal="area_entered" from="UpperBodySprite/InteractionDetector" to="." method="_on_interaction_detector_area_entered"]
+[connection signal="area_exited" from="UpperBodySprite/InteractionDetector" to="." method="_on_interaction_detector_area_exited"]
+[connection signal="body_entered" from="UpperBodySprite/InteractionDetector" to="." method="_on_interaction_detector_body_entered"]
+[connection signal="body_exited" from="UpperBodySprite/InteractionDetector" to="." method="_on_interaction_detector_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="UpperBodyMachine/Land" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="UpperBodyMachine/Attack" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="UpperBodyMachine/Shoot" method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timers/StartJumpTimer" to="UpperBodyMachine/StartJump" method="_on_start_jump_timer_timeout"]
+[connection signal="timeout" from="Timers/QuitStateTimer" to="UpperBodyMachine/Attack" method="_on_melee_combo_timer_timeout"]
+[connection signal="timeout" from="Timers/ReloadingTimer" to="UpperBodyMachine/Reload" method="_on_reloading_timer_timeout"]
+[connection signal="timeout" from="Timers/RespawnTimer" to="UpperBodyMachine/Die" method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="Timers/RespawnCooldown" to="." method="_on_respawn_cooldown_timeout"]

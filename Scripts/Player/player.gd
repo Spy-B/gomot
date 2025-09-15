@@ -105,14 +105,16 @@ var health_bar_tween: Tween
 
 @export var checkpointManager: Node
 
+@onready var upper_body_sprite: Sprite2D = $UpperBodySprite
+#@onready var lower_body_sprite: Sprite2D = $LowerBodySprite
 
-@onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var gun_barrel: Marker2D = $PlayerSprite/GunBarrel
-@onready var interaction_detector: Area2D = $PlayerSprite/InteractionDetector
+@onready var gun_barrel: Marker2D = $UpperBodySprite/GunBarrel
+@onready var interaction_detector: Area2D = $UpperBodySprite/InteractionDetector
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-@onready var state_machine: Node = $StateMachine
+@onready var upper_body_machine: Node = $UpperBodyMachine
+@onready var lower_body_machine: Node = $LowerBodyMachine
 
 @onready var coyote_timer: Timer = $Timers/CoyoteTimer
 @onready var jump_buffer_timer: Timer = $Timers/JumpBufferTimer
@@ -125,7 +127,7 @@ var health_bar_tween: Tween
 
 func _ready() -> void:
 	Global.player = self
-	state_machine.init(self, gun_barrel, animation_player, coyote_timer, jump_buffer_timer)
+	upper_body_machine.init(self, gun_barrel, animation_player)
 	
 	if Global.started_new_game:
 		return
@@ -137,13 +139,13 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	state_machine.process_input(event)
+	upper_body_machine.process_input(event)
 
 func _physics_process(delta: float) -> void:
-	state_machine.process_physics(delta)
+	upper_body_machine.process_physics(delta)
 
 func _process(delta: float) -> void:
-	state_machine.process_frame(delta)
+	upper_body_machine.process_frame(delta)
 	
 	# TODO this functionality is not done yet
 	#if combo_fight_points:
@@ -167,9 +169,9 @@ func camera_offset() -> void:
 func respawning_effect() -> void:
 	var respawn_tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops(8)
 	
-	respawn_tween.tween_property(player_sprite.material, "shader_parameter/flashValue", 0.0, 0.1)
-	respawn_tween.tween_property(player_sprite.material, "shader_parameter/flashValue", 0.6, 0.1)
-	respawn_tween.tween_property(player_sprite.material, "shader_parameter/flashValue", 0.0, 0.1)
+	respawn_tween.tween_property(upper_body_sprite.material, "shader_parameter/flashValue", 0.0, 0.1)
+	respawn_tween.tween_property(upper_body_sprite.material, "shader_parameter/flashValue", 0.6, 0.1)
+	respawn_tween.tween_property(upper_body_sprite.material, "shader_parameter/flashValue", 0.0, 0.1)
 
 func _on_respawn_cooldown_timeout() -> void:
 	runtime_vars.just_respawn = false
