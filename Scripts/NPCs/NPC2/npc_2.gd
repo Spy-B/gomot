@@ -28,6 +28,10 @@ var states_history: Array = []
 @export var runSpeed: int = 200
 var dir: int = 1
 
+@export_group("Attack Ability")
+@export_range(0, 10, 0.5) var attackRate: float = 1.0
+@export_range(0, 100, 5) var hitDamage: int = 25
+
 ##Dialogue System
 @export_group("Others")
 @export var dialogueJson: JSON
@@ -48,6 +52,7 @@ var dir: int = 1
 @onready var npcs_state_machine: Node = $NPCsStateMachine
 
 ##Roaming game states timer
+@onready var attacking_timer: Timer = $Timers/AttackingTimer
 @onready var rgs_timer: Timer = $Timers/RGSTimer
 #@onready var cooldown_period_timer: Timer = $Timers/CooldownPeriodTimer
 
@@ -55,7 +60,7 @@ var dir: int = 1
 
 
 func _ready() -> void:
-	npcs_state_machine.init(self, sprite, animation_player, gun_barre)
+	npcs_state_machine.init(self, sprite, animation_player, gun_barrel)
 	
 	match NpcType:
 		0:
@@ -107,5 +112,6 @@ func _process(delta: float) -> void:
 	if player_detector.get_collider() == Global.player:
 		player_detected = true
 		cool_down = false
-	else:
+	elif player_detector.get_collider() == Global.player:
 		player_detected = false
+		cool_down = true

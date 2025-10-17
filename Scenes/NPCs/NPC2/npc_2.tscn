@@ -167,7 +167,6 @@ attackingState = NodePath("NPCsStateMachine/Attack")
 talkingState = NodePath("NPCsStateMachine/Talk")
 damagingState = NodePath("NPCsStateMachine/Damage")
 deathState = NodePath("NPCsStateMachine/Die")
-NpcType = null
 walkSpeed = 50
 runSpeed = 100
 
@@ -249,6 +248,7 @@ animationName = &"Running"
 
 [node name="CoolDown" type="Node" parent="NPCsStateMachine"]
 script = ExtResource("8_fahug")
+animationName = &"Idle"
 
 [node name="Attack" type="Node" parent="NPCsStateMachine"]
 script = ExtResource("9_mxhb3")
@@ -264,14 +264,6 @@ script = ExtResource("11_5bjfu")
 [node name="Die" type="Node" parent="NPCsStateMachine"]
 script = ExtResource("12_658ek")
 animationName = &"Death"
-
-[node name="StartJump" type="Node" parent="NPCsStateMachine"]
-
-[node name="Jump" type="Node" parent="NPCsStateMachine"]
-
-[node name="Fall" type="Node" parent="NPCsStateMachine"]
-
-[node name="Land" type="Node" parent="NPCsStateMachine"]
 
 [node name="Timers" type="Node" parent="."]
 

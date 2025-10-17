@@ -16,9 +16,8 @@ func process_frame(_delta: float) -> NPCsState:
 		return parent.damagingState
 	
 	if !parent.attacking_ray_cast.get_collider() == Global.player && parent.health > 0:
-		#enter()
-	#else:
-			return parent.idleState
+		parent.player_detected = false
+		return parent.idleState
 	
 	return null
 

@@ -14,8 +14,8 @@ func enter() -> void:
 	randomize()
 	waiting_time = randf_range(1, 4)
 	
-	rgs_timer.wait_time = waiting_time
-	rgs_timer.start()
+	parent.rgs_timer.wait_time = waiting_time
+	parent.rgs_timer.start()
 	
 	parent.dir *= -1
 

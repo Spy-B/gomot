@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://phsxnlyl6nk1"]
+[gd_scene load_steps=46 format=4 uid="uid://phsxnlyl6nk1"]
 
 [ext_resource type="Script" uid="uid://cnf78ko7r6hcr" path="res://Scripts/LVLs/lvl.gd" id="1_rbo7i"]
 [ext_resource type="PackedScene" uid="uid://clppwcfehohc5" path="res://Scenes/LVLs/Parallax_Background_2.tscn" id="2_isc4c"]
@@ -27,6 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://dsbijqdyjddj5" path="res://Scenes/Interactions/moving_platform.tscn" id="17_7yri8"]
 [ext_resource type="PackedScene" uid="uid://capx801wrk1vo" path="res://Scenes/Obstacles/swinging_pendulum.tscn" id="17_ee1ov"]
 [ext_resource type="Texture2D" uid="uid://bs5d76qwgx1om" path="res://Assets/VFX/ParticlePack/magic_05.png" id="17_hhrw2"]
+[ext_resource type="PackedScene" uid="uid://bqsku42hjp1ed" path="res://Scenes/NPCs/NPC2/npc_2.tscn" id="25_qekjm"]
+[ext_resource type="JSON" path="res://Dialogues/EzraDialogueTest.json" id="26_ondqr"]
 [ext_resource type="PackedScene" uid="uid://dfajo8txid8ur" path="res://Scenes/Interactions/void.tscn" id="28_b3ecj"]
 [ext_resource type="Texture2D" uid="uid://du5scffh4g2tm" path="res://Assets/Water_particle_1.png" id="29_j4gxf"]
 
@@ -257,10 +259,17 @@ player = NodePath("../../Player")
 
 [node name="Enemies" type="Node2D" parent="NPCs"]
 
-[node name="NPC" parent="NPCs/Enemies" instance=ExtResource("13_ondqr")]
-position = Vector2(948, 887)
+[node name="NPC" parent="NPCs/Enemies" instance=ExtResource("25_qekjm")]
+position = Vector2(824, 936)
+NpcType = 1
+dialogueJson = ExtResource("26_ondqr")
 
 [node name="Friendly" type="Node2D" parent="NPCs"]
+
+[node name="NPC" parent="NPCs/Friendly" instance=ExtResource("13_ondqr")]
+position = Vector2(1272, 924)
+NpcType = 1
+dialogueJson = ExtResource("26_ondqr")
 
 [node name="Player" parent="." node_paths=PackedStringArray("checkpointManager") instance=ExtResource("14_qekjm")]
 unique_name_in_owner = true

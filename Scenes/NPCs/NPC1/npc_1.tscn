@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cmdo4y67uis4f"]
+[gd_scene load_steps=29 format=3 uid="uid://cmdo4y67uis4f"]
 
 [ext_resource type="Script" uid="uid://bj3uho672bvem" path="res://Scripts/NPCs/NPC1/npc_1.gd" id="1_e8lvv"]
 [ext_resource type="Shader" uid="uid://dmn0dmxfshr1d" path="res://Resources/Shaders/hit_flash.gdshader" id="2_5dkjo"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bp8vfrf041qxm" path="res://Scripts/NPCs/NPC1/States/cool_down.gd" id="8_0q3ly"]
 [ext_resource type="Script" uid="uid://15vf6aaeeha8" path="res://Scripts/NPCs/NPC1/States/talk.gd" id="8_5xtl5"]
 [ext_resource type="Script" uid="uid://deo4juuw4jita" path="res://Scripts/NPCs/NPC1/States/die.gd" id="8_16q4q"]
+[ext_resource type="PackedScene" uid="uid://cwormf6p6oqbo" path="res://Scenes/NPCs/NPC1/npc_1_bullet.tscn" id="9_v5ibw"]
 [ext_resource type="Script" uid="uid://dbn4q5cdrk3xh" path="res://Scripts/NPCs/NPC1/States/damage.gd" id="13_n864f"]
 [ext_resource type="Script" uid="uid://hct8g0dwy6rm" path="res://Dialogues/dialogue_box.gd" id="14_c55s6"]
 [ext_resource type="LabelSettings" uid="uid://ck3j7eyrm2267" path="res://Resources/Labels/dialogues_label_settings.tres" id="14_ki3bk"]
@@ -26,6 +27,9 @@ resource_local_to_scene = true
 shader = ExtResource("2_5dkjo")
 shader_parameter/flashColor = Color(1, 1, 1, 1)
 shader_parameter/flashValue = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40auk"]
+size = Vector2(27.9999, 37)
 
 [sub_resource type="Animation" id="Animation_okxx1"]
 resource_name = "Death"
@@ -155,7 +159,7 @@ _data = {
 &"Talking": SubResource("Animation_kcs6m")
 }
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("idleState", "wanderingState", "chasingState", "cooldownState", "talkingState", "damagingState", "deathState")]
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("idleState", "wanderingState", "chasingState", "cooldownState", "shootingState", "reloadingState", "talkingState", "damagingState", "deathState")]
 collision_layer = 65536
 collision_mask = 1793
 script = ExtResource("1_e8lvv")
@@ -163,9 +167,12 @@ idleState = NodePath("NPCsStateMachine/Idle")
 wanderingState = NodePath("NPCsStateMachine/Wander")
 chasingState = NodePath("NPCsStateMachine/Chase")
 cooldownState = NodePath("NPCsStateMachine/CoolDown")
+shootingState = NodePath("NPCsStateMachine/Shoot")
+reloadingState = NodePath("NPCsStateMachine/Reload")
 talkingState = NodePath("NPCsStateMachine/Talk")
 damagingState = NodePath("NPCsStateMachine/Damage")
 deathState = NodePath("NPCsStateMachine/Die")
+bulletScene = ExtResource("9_v5ibw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -2.5)
@@ -178,6 +185,22 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_jwyqi")
 hframes = 8
 vframes = 13
+frame = 40
+
+[node name="Areas" type="Node2D" parent="Sprite2D"]
+position = Vector2(0, 8.5)
+rotation = 3.14159
+scale = Vector2(0.5, -0.5)
+
+[node name="HitArea" type="Area2D" parent="Sprite2D/Areas"]
+position = Vector2(-27, 0)
+collision_layer = 262144
+collision_mask = 256
+
+[node name="HitCollision" type="CollisionShape2D" parent="Sprite2D/Areas/HitArea"]
+position = Vector2(2.99997, -2.50002)
+shape = SubResource("RectangleShape2D_40auk")
+disabled = true
 
 [node name="RayCasts" type="Node2D" parent="Sprite2D"]
 
@@ -253,14 +276,6 @@ script = ExtResource("13_n864f")
 [node name="Die" type="Node" parent="NPCsStateMachine"]
 script = ExtResource("8_16q4q")
 animationName = &"Death"
-
-[node name="StartJump" type="Node" parent="NPCsStateMachine"]
-
-[node name="Jump" type="Node" parent="NPCsStateMachine"]
-
-[node name="Fall" type="Node" parent="NPCsStateMachine"]
-
-[node name="Land" type="Node" parent="NPCsStateMachine"]
 
 [node name="Timers" type="Node" parent="."]
 

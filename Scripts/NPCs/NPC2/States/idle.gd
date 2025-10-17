@@ -36,14 +36,14 @@ func process_frame(_delta: float) -> NPCsState:
 			if parent.player_detected:
 				return parent.chasingState
 		1:
-			parent.player_pos = (parent.player.global_position - parent.global_position).normalized()
+			parent.player_pos = (Global.player.global_position - parent.global_position).normalized()
 			
 			if parent.player_pos > Vector2(0, 0):
 				parent.dir = 1
 			elif parent.player_pos < Vector2(0, 0):
 				parent.dir = -1
 			
-			if parent.player.runtime_vars.start_dialogue:
+			if Global.player.runtime_vars.start_dialogue:
 				return parent.talkingState
 	
 	return null
