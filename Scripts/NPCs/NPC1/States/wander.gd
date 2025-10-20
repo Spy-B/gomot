@@ -1,6 +1,5 @@
 extends NPCsState
 
-var waiting_time: float
 var change_state: bool = false
 
 func enter() -> void:
@@ -12,9 +11,9 @@ func enter() -> void:
 	change_state = false
 	
 	randomize()
-	waiting_time = randf_range(1, 4)
+	parent.runtime_vars.waiting_time = randf_range(1, 4)
 	
-	parent.rgs_timer.wait_time = waiting_time
+	parent.rgs_timer.wait_time = parent.runtime_vars.waiting_time
 	parent.rgs_timer.start()
 	
 	parent.dir *= -1

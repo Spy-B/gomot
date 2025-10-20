@@ -260,14 +260,16 @@ player = NodePath("../../Player")
 [node name="Enemies" type="Node2D" parent="NPCs"]
 
 [node name="NPC2" parent="NPCs/Enemies" instance=ExtResource("25_qekjm")]
-position = Vector2(4827, 838)
+position = Vector2(952, 932)
+dialogueJson = ExtResource("26_ondqr")
+
+[node name="NPC" parent="NPCs/Enemies" instance=ExtResource("13_ondqr")]
+process_mode = 4
+visible = false
+position = Vector2(583, 929)
 dialogueJson = ExtResource("26_ondqr")
 
 [node name="Friendly" type="Node2D" parent="NPCs"]
-
-[node name="NPC" parent="NPCs/Friendly" instance=ExtResource("13_ondqr")]
-position = Vector2(583, 929)
-dialogueJson = ExtResource("26_ondqr")
 
 [node name="Player" parent="." node_paths=PackedStringArray("checkpointManager") instance=ExtResource("14_qekjm")]
 unique_name_in_owner = true

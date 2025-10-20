@@ -207,7 +207,7 @@ collision_mask = 3
 
 [node name="AttackingRayCast" type="RayCast2D" parent="Sprite2D/RayCasts"]
 position = Vector2(0, 6.66667)
-target_position = Vector2(16.6667, 4.76837e-07)
+target_position = Vector2(16, 0)
 collision_mask = 256
 
 [node name="PlayerDetector" type="RayCast2D" parent="Sprite2D/RayCasts"]

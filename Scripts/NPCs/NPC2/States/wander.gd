@@ -1,6 +1,5 @@
 extends NPCsState
 
-var waiting_time: float
 var change_state: bool = false
 
 
@@ -13,9 +12,9 @@ func enter() -> void:
 	change_state = false
 	
 	randomize()
-	waiting_time = randf_range(1, 4)
+	parent.runtime_vars.waiting_time = randf_range(1, 4)
 	
-	parent.rgs_timer.wait_time = waiting_time
+	parent.rgs_timer.wait_time = parent.runtime_vars.waiting_time
 	parent.rgs_timer.start()
 	
 	parent.dir *= -1
@@ -35,7 +34,7 @@ func process_physics(delta: float) -> NPCsState:
 	return null
 
 func process_frame(_delta: float) -> NPCsState:
-	if parent.damaged:
+	if parent.runtime_vars.damaged:
 		return parent.damagingState
 	
 	if change_state:
@@ -47,7 +46,7 @@ func process_frame(_delta: float) -> NPCsState:
 	if parent.w_ray_cast.is_colliding():
 		parent.dir *= -1
 	
-	if parent.player_detected:
+	if parent.runtime_vars.player_detected:
 		return parent.chasingState
 		
 	

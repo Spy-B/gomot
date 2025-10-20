@@ -7,15 +7,15 @@ var previous_state: NPCsState
 
 func enter() -> void:
 	super()
-	#print("[Enemy][State]: Damage")
+	print("[Enemy][State]: Damage")
 	
-	parent.damaged = false
+	parent.runtime_vars.damaged = false
 	
 	parent.sprite.material.set_shader_parameter("flashValue", 1.0)
 	damaging_timer.start()
 	
-	parent.health_bar.value -= parent.damage_value
-	parent.health = parent.health_bar.value
+	parent.runtime_vars.health -= parent.runtime_vars.damage_value
+	parent.health_bar.value = parent.runtime_vars.health
 	
 	previous_state = parent.states_history.back()
 	
@@ -23,11 +23,11 @@ func enter() -> void:
 		previous_state = parent.chasingState
 
 func process_frame(_delta: float) -> NPCsState:
-	if damaging_anime_finished && parent.health > 0:
+	if damaging_anime_finished && parent.runtime_vars.health > 0:
 		damaging_anime_finished = false
 		return previous_state
 	
-	elif damaging_anime_finished && parent.health <= 0:
+	elif damaging_anime_finished && parent.runtime_vars.health <= 0:
 		damaging_anime_finished = false
 		return parent.deathState
 	

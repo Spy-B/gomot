@@ -73,8 +73,8 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 
 func _on_hit_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group(parent.enemyGroup):
-		body.health -= attackDamage
-		body.damaged = true
-		body.damage_value = attackDamage
+		body.runtime_vars.health -= attackDamage
+		body.runtime_vars.damaged = true
+		body.runtime_vars.damage_value = attackDamage
 		#parent.runtime_vars.combo_fight_points += 1
 		print("[Enemy] -> [Health]: ", attackDamage)

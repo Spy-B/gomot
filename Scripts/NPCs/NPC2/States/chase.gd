@@ -20,11 +20,11 @@ func process_physics(delta: float) -> NPCsState:
 	if !parent.is_on_floor():
 		parent.velocity.y += gravity * delta
 	
-	parent.player_pos = (Global.player.global_position - parent.global_position).normalized()
+	parent.runtime_vars.player_pos = (Global.player.global_position - parent.global_position).normalized()
 	
-	if parent.player_pos > Vector2(0, 0):
+	if parent.runtime_vars.player_pos > Vector2(0, 0):
 		parent.dir = 1
-	elif parent.player_pos < Vector2(0, 0):
+	elif parent.runtime_vars.player_pos < Vector2(0, 0):
 		parent.dir = -1
 	
 	parent.velocity.x = parent.runSpeed * parent.dir
@@ -35,13 +35,15 @@ func process_physics(delta: float) -> NPCsState:
 	return null
 
 func process_frame(_delta: float) -> NPCsState:
-	if parent.damaged:
+	if parent.runtime_vars.damaged:
 		return parent.damagingState
 	
 	if parent.attacking_ray_cast.get_collider() == Global.player:
 		return parent.attackingState
+	else:
+		parent.attacking_timer.stop()
 	
-	if !parent.player_detected: 
+	if !parent.runtime_vars.player_detected: 
 		return parent.cooldownState
 	
 	return null

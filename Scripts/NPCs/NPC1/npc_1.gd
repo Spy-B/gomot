@@ -4,7 +4,7 @@ var runtime_vars: Dictionary = {
 	"movementWeight": 0.2,
 	"health": 100,
 	"player_detected": false,
-	"cool_down": true,
+	"cool_down": false,
 	"damaged": false,
 	"damage_value": 0,
 	"waiting_time": 0.0,

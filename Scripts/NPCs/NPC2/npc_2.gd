@@ -1,13 +1,24 @@
 extends CharacterBody2D
 
-var movementWeight: float = 0.2
-var health: int = 100
-var player_detected: bool = false
-var cool_down: bool = true
-var damaged: bool = false
-var damage_value: int
-var waiting_time: float
-var player_pos: Vector2
+var runtime_vars: Dictionary = {
+	"movementWeight": 0.2,
+	"health": 100,
+	"player_detected": false,
+	"cool_down": false,
+	"damaged": false,
+	"damage_value": 0,
+	"waiting_time": 0.0,
+	"player_pos": Vector2(0, 0),
+}
+
+# var movementWeight: float = 0.2
+# var health: int = 100
+# var player_detected: bool = false
+# var cool_down: bool = true
+# var damaged: bool = false
+# var damage_value: int
+# var waiting_time: float
+# var player_pos: Vector2
 
 var states_history: Array = []
 
@@ -74,9 +85,9 @@ func _ready() -> void:
 			set_collision_mask_value(9, true)
 			
 			randomize()
-			waiting_time = randf_range(1, 3)
+			runtime_vars.waiting_time = randf_range(1, 3)
 			
-			rgs_timer.wait_time = waiting_time
+			rgs_timer.wait_time = runtime_vars.waiting_time
 			rgs_timer.start()
 			
 			attacking_ray_cast.enabled = true
@@ -112,8 +123,7 @@ func _process(delta: float) -> void:
 	npcs_state_machine.process_frame(delta)
 	
 	if player_detector.get_collider() == Global.player:
-		player_detected = true
-		cool_down = false
-	elif player_detector.get_collider() == Global.player:
-		player_detected = false
-		cool_down = true
+		runtime_vars.player_detected = true
+		runtime_vars.cool_down = false
+	elif !player_detector.get_collider() == Global.player:
+		runtime_vars.player_detected = false

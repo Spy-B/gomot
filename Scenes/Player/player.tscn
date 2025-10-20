@@ -375,6 +375,7 @@ texture = ExtResource("1_enipy")
 flip_h = true
 hframes = 12
 vframes = 11
+frame = 57
 
 [node name="HitArea" type="Area2D" parent="UpperBodySprite"]
 position = Vector2(17, 16)
@@ -489,6 +490,7 @@ script = ExtResource("15_gsya0")
 animationName = &"Idle"
 
 [node name="LowerBodyMachine" parent="." instance=ExtResource("3_vytom")]
+process_mode = 4
 editor_description = "The Movement State Machine"
 script = ExtResource("23_2jnj1")
 

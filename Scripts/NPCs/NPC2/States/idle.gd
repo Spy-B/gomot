@@ -14,7 +14,7 @@ func process_physics(delta: float) -> NPCsState:
 	if !parent.is_on_floor():
 		parent.velocity.y += gravity * delta
 	
-	parent.velocity.x = lerp(parent.velocity.x, 0.0, parent.movementWeight)
+	parent.velocity.x = lerp(parent.velocity.x, 0.0, parent.runtime_vars.movementWeight)
 	sprite.scale.x = abs(sprite.scale.x) * parent.dir
 	
 	parent.move_and_slide()
@@ -24,7 +24,7 @@ func process_physics(delta: float) -> NPCsState:
 func process_frame(_delta: float) -> NPCsState:
 	match parent.NpcType:
 		0:
-			if parent.damaged:
+			if parent.runtime_vars.damaged:
 				return parent.damagingState
 			
 			if !parent.g_ray_cast.is_colliding() || change_state:
@@ -33,14 +33,14 @@ func process_frame(_delta: float) -> NPCsState:
 			if parent.w_ray_cast.is_colliding():
 				parent.dir *= -1
 			
-			if parent.player_detected:
+			if parent.runtime_vars.player_detected:
 				return parent.chasingState
 		1:
-			parent.player_pos = (Global.player.global_position - parent.global_position).normalized()
+			parent.runtime_vars.player_pos = (Global.player.global_position - parent.global_position).normalized()
 			
-			if parent.player_pos > Vector2(0, 0):
+			if parent.runtime_vars.player_pos > Vector2(0, 0):
 				parent.dir = 1
-			elif parent.player_pos < Vector2(0, 0):
+			elif parent.runtime_vars.player_pos < Vector2(0, 0):
 				parent.dir = -1
 			
 			if Global.player.runtime_vars.start_dialogue:
