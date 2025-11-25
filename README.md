@@ -1,10 +1,10 @@
 <div align="center">
   
-<!-- <img width="45%" height="auto" alt="RAPK-Project-Logo" src="https://github.com/user-attachments/assets/3ac4e34c-1bad-416c-ae57-d9ac5c1376d7" /> -->
+<img width="45%" height="auto" alt="Gomot-Logo - Only Content" src="https://github.com/user-attachments/assets/d47c3eb6-1c28-40a3-8952-9d641c12bada" />
 
-## Advanced Platformer Kit
+## It's an Advanced Godot Framework
 
-This is a **Godot Engine** Framework, it's fully customizable so that the games that will be made using this framework will look totally different from each other.
+This is a **Godot Engine** Framework, it should be fully customizable so that the games that will be made using this framework will look totally different from each other.
 </div>
 
 ***
@@ -93,7 +93,7 @@ click on **Add New Action**, then write its name and click on Add, and reapet it
 > There's no Documentation Available at the moment!
 
 > [!Tip]
-> as I said before this framework is not ready to use yet, so if you wanna use it you should discover it yourself for now, until I fix the issues and write the Documentation
+> as I said before this framework is not ready to use yet, so If you want to use it, you should figure it out for yourself now, until the issues are fixed and the documentation is written.
 ***
 
 # Special Thanks
