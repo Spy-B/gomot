@@ -1,0 +1,346 @@
+[gd_scene load_steps=27 format=3 uid="uid://bqsku42hjp1ed"]
+
+[ext_resource type="Script" uid="uid://driauk14w8pk0" path="res://entities/npcs/npc2/npc_2.gd" id="1_ss8iw"]
+[ext_resource type="Shader" uid="uid://dmn0dmxfshr1d" path="res://resources/shaders/hit_flash.gdshader" id="2_mel23"]
+[ext_resource type="Texture2D" uid="uid://djj1f4iwu5syc" path="res://assets/characters/npcs/enemies/Zombie.png" id="3_ss8iw"]
+[ext_resource type="PackedScene" uid="uid://cmbpwc3svcncr" path="res://entities/npcs/npcs_state_machine.tscn" id="4_tcyx1"]
+[ext_resource type="Script" uid="uid://be61otq00yvw1" path="res://entities/npcs/npc2/states/idle.gd" id="5_ss8iw"]
+[ext_resource type="Script" uid="uid://cd5hcwn1s7nt5" path="res://entities/npcs/npc2/states/wander.gd" id="6_h1h7t"]
+[ext_resource type="Script" uid="uid://bcle7el5xessy" path="res://entities/npcs/npc2/states/chase.gd" id="7_fvpbe"]
+[ext_resource type="Script" uid="uid://0321qvegt6s5" path="res://entities/npcs/npc2/states/cool_down.gd" id="8_fahug"]
+[ext_resource type="Script" uid="uid://ksv74k7gxcwi" path="res://entities/npcs/npc2/states/attack.gd" id="9_mxhb3"]
+[ext_resource type="Script" uid="uid://bmxd41bjiy324" path="res://entities/npcs/npc2/states/talk.gd" id="10_cq2hv"]
+[ext_resource type="Script" uid="uid://yg2dgpr5rc3r" path="res://entities/npcs/npc2/states/damage.gd" id="11_5bjfu"]
+[ext_resource type="Script" uid="uid://b2u73dhsysrp8" path="res://entities/npcs/npc2/states/die.gd" id="12_658ek"]
+[ext_resource type="Script" uid="uid://hct8g0dwy6rm" path="res://utilities/dialogues/dialogue_box.gd" id="15_hkaf3"]
+[ext_resource type="LabelSettings" uid="uid://ck3j7eyrm2267" path="res://resources/labels/dialogues_label_settings.tres" id="16_mqwvp"]
+[ext_resource type="Texture2D" uid="uid://bk3ipmaetj1hl" path="res://assets/vfx/particle_material.png" id="17_kntxr"]
+[ext_resource type="Script" uid="uid://lngqm66mqljp" path="res://addons/ez_dialogue/ez_dialogue_node.gd" id="18_bx8mn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6da7p"]
+size = Vector2(30, 35)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n864f"]
+resource_local_to_scene = true
+shader = ExtResource("2_mel23")
+shader_parameter/flashColor = Color(1, 1, 1, 1)
+shader_parameter/flashValue = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40auk"]
+size = Vector2(11.667, 29.1667)
+
+[sub_resource type="Animation" id="Animation_57c1o"]
+resource_name = "Attacking"
+length = 0.4
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.12, 0.18, 0.24, 0.3, 0.36),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 18, 19]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Areas/HitArea/HitCollision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.12, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_okxx1"]
+resource_name = "Death"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [65, 66, 67, 69, 70, 71, 72]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_a4b5n"]
+resource_name = "Idle"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ss8iw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/Areas/HitArea/HitCollision:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_dpk7x"]
+resource_name = "Running"
+length = 0.32
+loop_mode = 1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [26, 27, 28, 29, 30, 31, 32, 33]
+}
+
+[sub_resource type="Animation" id="Animation_kcs6m"]
+resource_name = "Talking"
+length = 0.2
+loop_mode = 1
+step = 0.05
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fbn5t"]
+_data = {
+&"Attacking": SubResource("Animation_57c1o"),
+&"Death": SubResource("Animation_okxx1"),
+&"Idle": SubResource("Animation_a4b5n"),
+&"RESET": SubResource("Animation_ss8iw"),
+&"Running": SubResource("Animation_dpk7x"),
+&"Talking": SubResource("Animation_kcs6m")
+}
+
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("idleState", "wanderingState", "chasingState", "cooldownState", "attackingState", "talkingState", "damagingState", "deathState")]
+collision_layer = 65536
+collision_mask = 1537
+script = ExtResource("1_ss8iw")
+idleState = NodePath("NPCsStateMachine/Idle")
+wanderingState = NodePath("NPCsStateMachine/Wander")
+chasingState = NodePath("NPCsStateMachine/Chase")
+cooldownState = NodePath("NPCsStateMachine/CoolDown")
+attackingState = NodePath("NPCsStateMachine/Attack")
+talkingState = NodePath("NPCsStateMachine/Talk")
+damagingState = NodePath("NPCsStateMachine/Damage")
+deathState = NodePath("NPCsStateMachine/Die")
+walkSpeed = 50
+runSpeed = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -2.5)
+shape = SubResource("RectangleShape2D_6da7p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_n864f")
+position = Vector2(0, -4)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("3_ss8iw")
+hframes = 13
+vframes = 6
+frame = 13
+
+[node name="Areas" type="Node2D" parent="Sprite2D"]
+
+[node name="HitArea" type="Area2D" parent="Sprite2D/Areas"]
+position = Vector2(10.5, 1.25)
+collision_layer = 262144
+collision_mask = 256
+
+[node name="HitCollision" type="CollisionShape2D" parent="Sprite2D/Areas/HitArea"]
+shape = SubResource("RectangleShape2D_40auk")
+disabled = true
+
+[node name="RayCasts" type="Node2D" parent="Sprite2D"]
+
+[node name="GRayCast" type="RayCast2D" parent="Sprite2D/RayCasts"]
+position = Vector2(8, 8.5)
+target_position = Vector2(0, 12)
+
+[node name="WRayCast" type="RayCast2D" parent="Sprite2D/RayCasts"]
+position = Vector2(0, 6.66667)
+target_position = Vector2(12, 0)
+collision_mask = 3
+
+[node name="AttackingRayCast" type="RayCast2D" parent="Sprite2D/RayCasts"]
+position = Vector2(0, 6.66667)
+target_position = Vector2(16, 0)
+collision_mask = 256
+
+[node name="PlayerDetector" type="RayCast2D" parent="Sprite2D/RayCasts"]
+position = Vector2(0, 6.66667)
+target_position = Vector2(250, 0)
+collision_mask = 256
+
+[node name="GunBarrel" type="Marker2D" parent="Sprite2D"]
+position = Vector2(8, 8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fbn5t")
+}
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -2.86102e-06)
+scale = Vector2(27.2, 12.8)
+rect = Rect2(-14.705883, -17.5, 29.411766, 35)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="VisibleOnScreenNotifier2D"]
+rect = Rect2(-14.705883, -17.5, 29.411766, 35)
+enable_node_path = NodePath("../..")
+
+[node name="NPCsStateMachine" parent="." node_paths=PackedStringArray("startingState") instance=ExtResource("4_tcyx1")]
+startingState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="NPCsStateMachine"]
+script = ExtResource("5_ss8iw")
+animationName = &"Idle"
+
+[node name="Wander" type="Node" parent="NPCsStateMachine"]
+script = ExtResource("6_h1h7t")
+animationName = &"Running"
+
+[node name="Chase" type="Node" parent="NPCsStateMachine"]
+script = ExtResource("7_fvpbe")
+cooldownPeriod = 4.0
+animationName = &"Running"
+
+[node name="CoolDown" type="Node" parent="NPCsStateMachine"]
+script = ExtResource("8_fahug")
+animationName = &"Idle"
+
+[node name="Attack" type="Node" parent="NPCsStateMachine"]
+script = ExtResource("9_mxhb3")
+animationName = &"Attacking"
+
+[node name="Talk" type="Node" parent="NPCsStateMachine"]
+script = ExtResource("10_cq2hv")
+animationName = &"Talking"
+
+[node name="Damage" type="Node" parent="NPCsStateMachine"]
+script = ExtResource("11_5bjfu")
+
+[node name="Die" type="Node" parent="NPCsStateMachine"]
+script = ExtResource("12_658ek")
+animationName = &"Death"
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="AttackingTimer" type="Timer" parent="Timers"]
+
+[node name="CooldownPeriodTimer" type="Timer" parent="Timers"]
+
+[node name="DamagingTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = -39.0
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -27.0
+value = 100.0
+nine_patch_stretch = true
+tint_progress = Color(0.907709, 0.0900278, 5.77569e-07, 1)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("15_hkaf3")
+
+[node name="DialogueText" type="Label" parent="UI/DialogueBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -16.0
+offset_right = 30.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = ExtResource("16_mqwvp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DialogueTimerProgress" type="TextureProgressBar" parent="UI/DialogueBox"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+value = 100.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_progress = ExtResource("17_kntxr")
+
+[node name="DialogueTimer" type="Timer" parent="UI/DialogueBox"]
+
+[node name="EzDialogue" type="Node" parent="UI/DialogueBox"]
+script = ExtResource("18_bx8mn")
+metadata/_custom_type_script = "uid://lngqm66mqljp"
+
+[connection signal="body_entered" from="Sprite2D/Areas/HitArea" to="NPCsStateMachine/Attack" method="_on_hit_area_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="NPCsStateMachine/Damage" method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timers/AttackingTimer" to="NPCsStateMachine/Attack" method="_on_attacking_timer_timeout"]
+[connection signal="timeout" from="Timers/CooldownPeriodTimer" to="NPCsStateMachine/CoolDown" method="_on_cooldown_period_timer_timeout"]
+[connection signal="timeout" from="Timers/DamagingTimer" to="NPCsStateMachine/Damage" method="_on_damaging_timer_timeout"]
+[connection signal="timeout" from="UI/DialogueBox/DialogueTimer" to="UI/DialogueBox" method="_on_dialogue_timer_timeout"]
+[connection signal="dialogue_generated" from="UI/DialogueBox/EzDialogue" to="NPCsStateMachine/Talk" method="_on_ez_dialogue_dialogue_generated"]
+[connection signal="end_of_dialogue_reached" from="UI/DialogueBox/EzDialogue" to="NPCsStateMachine/Talk" method="_on_ez_dialogue_end_of_dialogue_reached"]

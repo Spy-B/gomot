@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvplrh5krh46n"]
+
+[ext_resource type="Script" uid="uid://cleogt786p7en" path="res://entities/ui/menus/main_menu.gd" id="1_bsjfe"]
+[ext_resource type="FontFile" uid="uid://c6ru82xe18d6j" path="res://assets/fonts/BoldPixels1.4.ttf" id="2_2bskk"]
+[ext_resource type="Theme" uid="uid://c7k57134accys" path="res://resources/themes/main_menu_buttons.theme" id="3_am3qo"]
+[ext_resource type="PackedScene" uid="uid://562d6x481l84" path="res://entities/ui/transation/feed_effect.tscn" id="4_1tfvi"]
+[ext_resource type="PackedScene" uid="uid://4mwvhvifpjlc" path="res://entities/ui/menus/new_game.tscn" id="5_2bskk"]
+[ext_resource type="PackedScene" uid="uid://chwbpf00sk5mc" path="res://entities/ui/menus/load_game.tscn" id="6_neua7"]
+[ext_resource type="PackedScene" uid="uid://oxbvn8ongbbb" path="res://entities/ui/menus/settings_menu.tscn" id="7_h23im"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u7lva"]
+font = ExtResource("2_2bskk")
+font_size = 80
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bsjfe")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0115524, 0.428849, 0.558751, 0.588235)
+
+[node name="GameName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -358.5
+offset_top = 100.0
+offset_right = 358.5
+offset_bottom = 196.0
+grow_horizontal = 2
+text = "Gomot"
+label_settings = SubResource("LabelSettings_u7lva")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -302.0
+offset_top = -632.0
+offset_right = 306.0
+offset_bottom = -157.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 35
+
+[node name="Continue" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_am3qo")
+text = "Continue"
+
+[node name="NewGame" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_am3qo")
+text = "New Game"
+
+[node name="LoadGame" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_am3qo")
+text = "Load Game"
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_am3qo")
+text = "Options"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_am3qo")
+text = "Quit"
+
+[node name="NewGame" parent="." instance=ExtResource("5_2bskk")]
+visible = false
+layout_mode = 1
+
+[node name="LoadGame" parent="." instance=ExtResource("6_neua7")]
+visible = false
+layout_mode = 1
+
+[node name="Options" parent="." instance=ExtResource("7_h23im")]
+visible = false
+layout_mode = 1
+
+[node name="FeedEffect" parent="." instance=ExtResource("4_1tfvi")]
+visible = false
+
+[connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5jykne82vv5x"]
+
+[ext_resource type="Script" uid="uid://c4kn3niios4eq" path="res://entities/interactions/elevator/elevator.gd" id="1_7cpsn"]
+[ext_resource type="Texture2D" uid="uid://dw3dhiavoiaik" path="res://assets/envirement/KERES-000_Pod.png" id="2_lcc2e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_biota"]
+radius = 2.0
+height = 65.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcc2e"]
+size = Vector2(40, 48)
+
+[node name="Elevator" type="Path2D"]
+script = ExtResource("1_7cpsn")
+MovementPath = 0.01
+texture = ExtResource("2_lcc2e")
+collisionShape = SubResource("CapsuleShape2D_biota")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+update_rotation = false
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+collision_mask = 256
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("2_lcc2e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0, 32)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_biota")
+
+[node name="ElevatorActivationKey" type="Area2D" parent="AnimatableBody2D"]
+position = Vector2(0, 8)
+collision_layer = 8
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D/ElevatorActivationKey"]
+shape = SubResource("RectangleShape2D_lcc2e")
+
+[connection signal="body_entered" from="AnimatableBody2D/ElevatorActivationKey" to="." method="_on_elevator_activation_key_body_entered"]
+[connection signal="body_exited" from="AnimatableBody2D/ElevatorActivationKey" to="." method="_on_elevator_activation_key_body_exited"]

@@ -1,0 +1,675 @@
+[gd_scene load_steps=54 format=3 uid="uid://odlluvrio0fy"]
+
+[ext_resource type="Script" uid="uid://c84khsfjk8jkw" path="res://entities/player/player.gd" id="1_3wwtw"]
+[ext_resource type="Texture2D" uid="uid://df6a0s6s4n8rm" path="res://assets/characters/player/red_hood.png" id="1_enipy"]
+[ext_resource type="Shader" uid="uid://dmn0dmxfshr1d" path="res://resources/shaders/hit_flash.gdshader" id="2_qr1w5"]
+[ext_resource type="PackedScene" uid="uid://cm04fvl3igrbw" path="res://entities/player/state_machines/state_machine.tscn" id="3_vytom"]
+[ext_resource type="Script" uid="uid://cybju0gm13lo8" path="res://entities/player/upper_body_states/idle.gd" id="4_g7jtl"]
+[ext_resource type="Script" uid="uid://coddbe7btvcrq" path="res://entities/player/upper_body_states/walk.gd" id="5_jpb0k"]
+[ext_resource type="Script" uid="uid://byf7ryu8crct7" path="res://entities/player/upper_body_states/run.gd" id="6_msey6"]
+[ext_resource type="Script" uid="uid://b7eihklgcn423" path="res://entities/player/upper_body_states/start_jump.gd" id="7_6kwnr"]
+[ext_resource type="Script" uid="uid://178dipm3233o" path="res://entities/player/upper_body_states/jump.gd" id="7_ncnvn"]
+[ext_resource type="Script" uid="uid://nm36cwca46sv" path="res://entities/player/upper_body_states/fall.gd" id="8_aob0q"]
+[ext_resource type="Script" uid="uid://da1r8os1lqcvy" path="res://entities/player/upper_body_states/attack.gd" id="9_6ut1u"]
+[ext_resource type="Script" uid="uid://dxvf4khhnwias" path="res://entities/player/upper_body_states/land.gd" id="9_8wtju"]
+[ext_resource type="Script" uid="uid://dgblu2jsnjcwy" path="res://entities/player/upper_body_states/shoot.gd" id="10_xqoms"]
+[ext_resource type="Script" uid="uid://cxhhcu4ieh75a" path="res://entities/player/upper_body_states/die.gd" id="11_wk1dk"]
+[ext_resource type="Script" uid="uid://bk7yn64jahon1" path="res://entities/player/upper_body_states/dash.gd" id="12_fcwna"]
+[ext_resource type="PackedScene" uid="uid://ctncad00jdckv" path="res://entities/player/player_bullet/player_bullet.tscn" id="13_88yj3"]
+[ext_resource type="Script" uid="uid://573j87l0n3we" path="res://entities/player/upper_body_states/floating.gd" id="14_1agin"]
+[ext_resource type="Script" uid="uid://o10qb2iw2jbp" path="res://entities/player/upper_body_states/reload.gd" id="14_jlfwl"]
+[ext_resource type="Script" uid="uid://dc2qoct47fdum" path="res://entities/player/upper_body_states/talk.gd" id="15_aqm4k"]
+[ext_resource type="Script" uid="uid://caq1yqbc8kym7" path="res://entities/player/upper_body_states/respawn.gd" id="15_gsya0"]
+[ext_resource type="Script" uid="uid://brqsr0b2h4c1l" path="res://entities/player/upper_body_states/interact.gd" id="16_4no11"]
+[ext_resource type="Script" uid="uid://qjnw7dalx0dg" path="res://entities/player/upper_body_states/damage.gd" id="16_rqdc0"]
+[ext_resource type="Script" path="res://entities/player/in_game_ui.gd" id="17_1w6uu"]
+[ext_resource type="Texture2D" uid="uid://ct1nomm0fe8i1" path="res://assets/ui/Keyboard_E_Icon.png" id="18_hnuln"]
+[ext_resource type="LabelSettings" uid="uid://cppao4gwki6g6" path="res://resources/labels/ui_label_settings.tres" id="19_rcvs5"]
+[ext_resource type="Texture2D" uid="uid://b8fehev3f8hhn" path="res://assets/ui/Health_Bar_(Under).png" id="21_jincj"]
+[ext_resource type="LabelSettings" uid="uid://ck3j7eyrm2267" path="res://resources/labels/dialogues_label_settings.tres" id="21_ur3l4"]
+[ext_resource type="Texture2D" uid="uid://dhc3fr0uxguvh" path="res://assets/ui/Health_Bar_(Over).png" id="22_rqdc0"]
+[ext_resource type="Script" uid="uid://cfat8di0wf1l" path="res://entities/player/state_machines/lower_body_machine.gd" id="23_2jnj1"]
+[ext_resource type="Texture2D" uid="uid://b26eqjgoo246y" path="res://assets/ui/Health_Bar_(Progress).png" id="23_qr1w5"]
+[ext_resource type="SpriteFrames" uid="uid://8j0a8xad6srp" path="res://resources/loading_anime.tres" id="26_bmb2s"]
+[ext_resource type="PackedScene" uid="uid://ddttrsm0vcrxa" path="res://entities/ui/touch_screen_controller/touch_screen_controller.tscn" id="26_ythyg"]
+[ext_resource type="PackedScene" uid="uid://dcqdlc1umudh4" path="res://entities/ui/menus/pause_menu.tscn" id="28_2ahak"]
+[ext_resource type="PackedScene" uid="uid://562d6x481l84" path="res://entities/ui/transation/feed_effect.tscn" id="29_rukb4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2jnj1"]
+radius = 8.0
+height = 35.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ythyg"]
+shader = ExtResource("2_qr1w5")
+shader_parameter/flashColor = Color(1, 1, 1, 1)
+shader_parameter/flashValue = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omcea"]
+size = Vector2(21, 34.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ahak"]
+size = Vector2(4, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4no11"]
+size = Vector2(45, 4)
+
+[sub_resource type="Animation" id="Animation_yipag"]
+resource_name = "Attack1"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [57, 58, 59, 60, 61, 62]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpperBodySprite/HitArea/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_0vm1q"]
+resource_name = "Attack2"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [63, 64, 65, 66, 67]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpperBodySprite/HitArea/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ua1bk"]
+resource_name = "Attack3"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpperBodySprite/HitArea/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_4kem3"]
+resource_name = "Death"
+length = 0.56
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32, 0.4, 0.48),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [120, 121, 122, 123, 124, 125, 126]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.48, 0.56),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.56),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_8eqv0"]
+resource_name = "Falling"
+length = 0.15
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [45, 46, 47]
+}
+
+[sub_resource type="Animation" id="Animation_1cwvy"]
+resource_name = "Idle"
+length = 0.1
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3glbj"]
+resource_name = "Jumping"
+length = 0.15
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [35, 36, 37]
+}
+
+[sub_resource type="Animation" id="Animation_64eys"]
+resource_name = "Landing"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 50, 51]
+}
+
+[sub_resource type="Animation" id="Animation_ythyg"]
+resource_name = "Respawning"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:material:shader_parameter/flashValue")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_y0m0f"]
+resource_name = "Running"
+length = 0.96
+loop_mode = 1
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.52, 0.56, 0.6, 0.64, 0.68, 0.72, 0.76, 0.8, 0.84, 0.88, 0.92),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+}
+
+[sub_resource type="Animation" id="Animation_4wr1e"]
+resource_name = "Shooting"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [25, 26, 27, 28, 29, 30, 31, 32, 33]
+}
+
+[sub_resource type="Animation" id="Animation_hujm0"]
+resource_name = "StartJumping"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpperBodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [34]
+}
+
+[sub_resource type="Animation" id="Animation_5e1ev"]
+resource_name = "Walking"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fqlx5"]
+_data = {
+&"Attack1": SubResource("Animation_yipag"),
+&"Attack2": SubResource("Animation_0vm1q"),
+&"Attack3": SubResource("Animation_ua1bk"),
+&"Death": SubResource("Animation_4kem3"),
+&"Falling": SubResource("Animation_8eqv0"),
+&"Idle": SubResource("Animation_1cwvy"),
+&"Jumping": SubResource("Animation_3glbj"),
+&"Landing": SubResource("Animation_64eys"),
+&"Respawning": SubResource("Animation_ythyg"),
+&"Running": SubResource("Animation_y0m0f"),
+&"Shooting": SubResource("Animation_4wr1e"),
+&"StartJumping": SubResource("Animation_hujm0"),
+&"Walking": SubResource("Animation_5e1ev")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("idleState", "walkingState", "runningState", "startJumpingState", "jumpingState", "fallingState", "landingState", "dashingState", "attackingState", "shootingState", "reloadingState", "interactState", "talkingState", "damagingState", "deathState", "respawningState") groups=["Player"]]
+collision_layer = 256
+collision_mask = 458801
+script = ExtResource("1_3wwtw")
+idleState = NodePath("UpperBodyMachine/Idle")
+walkingState = NodePath("UpperBodyMachine/Walk")
+runningState = NodePath("UpperBodyMachine/Run")
+startJumpingState = NodePath("UpperBodyMachine/StartJump")
+jumpingState = NodePath("UpperBodyMachine/Jump")
+fallingState = NodePath("UpperBodyMachine/Fall")
+landingState = NodePath("UpperBodyMachine/Land")
+dashingState = NodePath("UpperBodyMachine/Dash")
+attackingState = NodePath("UpperBodyMachine/Attack")
+shootingState = NodePath("UpperBodyMachine/Shoot")
+reloadingState = NodePath("UpperBodyMachine/Reload")
+interactState = NodePath("UpperBodyMachine/Interact")
+talkingState = NodePath("UpperBodyMachine/Talk")
+damagingState = NodePath("UpperBodyMachine/Damage")
+deathState = NodePath("UpperBodyMachine/Die")
+respawningState = NodePath("UpperBodyMachine/Respawn")
+walkingAbility = false
+bulletScene = ExtResource("13_88yj3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.75)
+shape = SubResource("CapsuleShape2D_2jnj1")
+
+[node name="UpperBodySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ythyg")
+position = Vector2(0, -16)
+texture = ExtResource("1_enipy")
+flip_h = true
+hframes = 12
+vframes = 11
+frame = 25
+
+[node name="HitArea" type="Area2D" parent="UpperBodySprite"]
+position = Vector2(17, 16)
+collision_layer = 256
+collision_mask = 196608
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperBodySprite/HitArea"]
+position = Vector2(1.5, -2.75)
+shape = SubResource("RectangleShape2D_omcea")
+disabled = true
+
+[node name="NPCDetector" type="Area2D" parent="UpperBodySprite"]
+position = Vector2(0, 16)
+collision_layer = 2048
+collision_mask = 16777216
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperBodySprite/NPCDetector"]
+position = Vector2(4, 0)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_2ahak")
+
+[node name="InteractionDetector" type="Area2D" parent="UpperBodySprite"]
+position = Vector2(0, 16)
+collision_layer = 4096
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperBodySprite/InteractionDetector"]
+position = Vector2(13.5, 0)
+shape = SubResource("RectangleShape2D_4no11")
+
+[node name="GunBarrel" type="Marker2D" parent="UpperBodySprite"]
+position = Vector2(9, 14)
+
+[node name="LowerBodySprite" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fqlx5")
+}
+
+[node name="UpperBodyMachine" parent="." node_paths=PackedStringArray("startingState") instance=ExtResource("3_vytom")]
+editor_description = "Attacking, Interacting... State Machine"
+startingState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("4_g7jtl")
+animationName = &"Idle"
+
+[node name="Walk" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("5_jpb0k")
+animationName = &"Running"
+
+[node name="Run" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("6_msey6")
+animationName = &"Running"
+
+[node name="StartJump" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("7_6kwnr")
+wait_time = 0.05
+animationName = &"StartJumping"
+
+[node name="Jump" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("7_ncnvn")
+animationName = &"Jumping"
+
+[node name="Fall" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("8_aob0q")
+animationName = &"Falling"
+
+[node name="Land" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("9_8wtju")
+animationName = &"Landing"
+
+[node name="Dash" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("12_fcwna")
+animationName = &"Idle"
+
+[node name="Floating" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("14_1agin")
+
+[node name="Attack" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("9_6ut1u")
+comboAttacks = Array[String](["Attack1", "Attack2", "Attack3"])
+animationName = &"Attack1"
+
+[node name="Shoot" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("10_xqoms")
+animationName = &"Shooting"
+
+[node name="Reload" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("14_jlfwl")
+animationName = &"Idle"
+
+[node name="Interact" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("16_4no11")
+animationName = &"Idle"
+
+[node name="Talk" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("15_aqm4k")
+animationName = &"Idle"
+
+[node name="Damage" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("16_rqdc0")
+animationName = &"Death"
+
+[node name="Die" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("11_wk1dk")
+animationName = &"Death"
+
+[node name="Respawn" type="Node" parent="UpperBodyMachine"]
+script = ExtResource("15_gsya0")
+animationName = &"Idle"
+
+[node name="LowerBodyMachine" parent="." instance=ExtResource("3_vytom")]
+process_mode = 4
+editor_description = "The Movement State Machine"
+script = ExtResource("23_2jnj1")
+
+[node name="Idle" type="Node" parent="LowerBodyMachine"]
+
+[node name="Walk" type="Node" parent="LowerBodyMachine"]
+
+[node name="Run" type="Node" parent="LowerBodyMachine"]
+
+[node name="StartJump" type="Node" parent="LowerBodyMachine"]
+
+[node name="Jump" type="Node" parent="LowerBodyMachine"]
+
+[node name="Fall" type="Node" parent="LowerBodyMachine"]
+
+[node name="Land" type="Node" parent="LowerBodyMachine"]
+
+[node name="Dash" type="Node" parent="LowerBodyMachine"]
+
+[node name="Floating" type="Node" parent="LowerBodyMachine"]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="StartJumpTimer" type="Timer" parent="Timers"]
+
+[node name="QuitStateTimer" type="Timer" parent="Timers"]
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="Timers"]
+wait_time = 0.3
+one_shot = true
+
+[node name="ReloadingTimer" type="Timer" parent="Timers"]
+
+[node name="RespawnTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+ignore_time_scale = true
+
+[node name="RespawnCooldown" type="Timer" parent="Timers"]
+wait_time = 2.0
+ignore_time_scale = true
+
+[node name="PhoneUI" parent="." instance=ExtResource("26_ythyg")]
+visible = false
+
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("phone_ui")]
+script = ExtResource("17_1w6uu")
+phone_ui = NodePath("../PhoneUI")
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="FPS" type="Label" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 64.0
+grow_horizontal = 0
+text = "60"
+label_settings = ExtResource("19_rcvs5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AmmoLabel" type="Label" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.142
+anchor_right = 0.142
+offset_left = 7.35999
+offset_top = 8.0
+offset_right = 183.36
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Ammo: "
+label_settings = ExtResource("21_ur3l4")
+vertical_alignment = 1
+
+[node name="ComboCounter" type="Label" parent="UI/Control"]
+visible = false
+layout_mode = 0
+offset_left = -60.0
+offset_top = 416.0
+offset_right = -20.0
+offset_bottom = 452.0
+text = "99"
+label_settings = ExtResource("19_rcvs5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractKey" type="TextureRect" parent="UI/Control"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.607843)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -136.0
+offset_right = 28.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("18_hnuln")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="HealthBar" type="TextureProgressBar" parent="UI/Control"]
+layout_mode = 1
+offset_left = 48.0
+offset_top = -24.0
+offset_right = 480.0
+offset_bottom = 120.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("21_jincj")
+texture_over = ExtResource("22_rqdc0")
+texture_progress = ExtResource("23_qr1w5")
+metadata/_edit_use_anchors_ = true
+
+[node name="LoadingIconControl" type="Control" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="LoadingIcon" type="AnimatedSprite2D" parent="UI/Control/LoadingIconControl"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(20, -44)
+scale = Vector2(0.24, 0.24)
+sprite_frames = ExtResource("26_bmb2s")
+animation = &"Loading"
+autoplay = "Loading"
+frame_progress = 0.00733908
+
+[node name="Pause" parent="UI" node_paths=PackedStringArray("phoneUI") instance=ExtResource("28_2ahak")]
+visible = false
+mouse_filter = 1
+phoneUI = NodePath("../../PhoneUI")
+
+[node name="FeedEffect" parent="UI" instance=ExtResource("29_rukb4")]
+visible = false
+
+[connection signal="body_entered" from="UpperBodySprite/HitArea" to="UpperBodyMachine/Attack" method="_on_hit_area_body_entered"]
+[connection signal="body_entered" from="UpperBodySprite/NPCDetector" to="." method="_on_npc_detector_body_entered"]
+[connection signal="body_exited" from="UpperBodySprite/NPCDetector" to="." method="_on_npc_detector_body_exited"]
+[connection signal="area_entered" from="UpperBodySprite/InteractionDetector" to="." method="_on_interaction_detector_area_entered"]
+[connection signal="area_exited" from="UpperBodySprite/InteractionDetector" to="." method="_on_interaction_detector_area_exited"]
+[connection signal="body_entered" from="UpperBodySprite/InteractionDetector" to="." method="_on_interaction_detector_body_entered"]
+[connection signal="body_exited" from="UpperBodySprite/InteractionDetector" to="." method="_on_interaction_detector_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="UpperBodyMachine/Land" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="UpperBodyMachine/Attack" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="UpperBodyMachine/Shoot" method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timers/StartJumpTimer" to="UpperBodyMachine/StartJump" method="_on_start_jump_timer_timeout"]
+[connection signal="timeout" from="Timers/QuitStateTimer" to="UpperBodyMachine/Attack" method="_on_quit_state_timer_timeout"]
+[connection signal="timeout" from="Timers/ReloadingTimer" to="UpperBodyMachine/Reload" method="_on_reloading_timer_timeout"]
+[connection signal="timeout" from="Timers/RespawnTimer" to="UpperBodyMachine/Die" method="_on_respawn_timer_timeout"]
+[connection signal="timeout" from="Timers/RespawnCooldown" to="." method="_on_respawn_cooldown_timeout"]

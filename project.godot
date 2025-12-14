@@ -16,20 +16,25 @@ config/version="Alpha 1.0"
 run/main_scene="uid://phsxnlyl6nk1"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="Spy-B/Gomot"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.5")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
-config/icon="uid://by1ctc74oefbn"
+config/icon="uid://bdjjmxtg28psy"
+run/enable_file_logging.pc=false
+run/log_path="user://logs/gomot.log"
+run/run_on_separate_thread=false
+run/icon="uid://by1ctc74oefbn"
+run/size/mode=4
 
 [autoload]
 
-Global="*res://Scripts/Global.gd"
+Global="*res://utilities/global.gd"
 
 [debug]
 
-file_logging/enable_file_logging.pc=false
-file_logging/log_path="user://logs/R.A.P.K.log"
+file_logging/log_path="user://logs/gomot.log"
 gdscript/warnings/untyped_declaration=1
 
 [display]
@@ -59,14 +64,14 @@ enabled=PackedStringArray("res://addons/ToastPlugin/plugin.cfg", "res://addons/T
 [file_customization]
 
 folder_colors={
-"res://Assets/": "teal",
-"res://Default/": "blue",
-"res://Dialogues/": "green",
-"res://Resources/": "purple",
-"res://Resources/Shaders/": "purple",
-"res://Scenes/": "orange",
-"res://Scripts/": "yellow",
-"res://addons/": "gray"
+"res://addons/": "gray",
+"res://assets/": "teal",
+"res://entities/": "orange",
+"res://localiztion/": "gray",
+"res://resources/": "purple",
+"res://resources/shaders/": "purple",
+"res://stages/": "yellow",
+"res://utilities/": "blue"
 }
 
 [gui]

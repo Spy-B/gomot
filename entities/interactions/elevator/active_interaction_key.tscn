@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2w5f1amljoj6"]
+
+[ext_resource type="Script" uid="uid://dvqivyhbcoupt" path="res://entities/interactions/elevator/active_interaction_key.gd" id="1_vb1bl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_apyc3"]
+
+[sub_resource type="Animation" id="Animation_vb1bl"]
+resource_name = "interact"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_04jxw"]
+_data = {
+&"interact": SubResource("Animation_vb1bl")
+}
+
+[node name="AIK" type="StaticBody2D" groups=["Interaction"]]
+editor_description = "Active Interaction Key"
+collision_layer = 8
+collision_mask = 4096
+script = ExtResource("1_vb1bl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_apyc3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_04jxw")
+}

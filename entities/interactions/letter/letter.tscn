@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://4qvtq6epoo3e"]
+
+[ext_resource type="Script" uid="uid://c12b2x2ywwk8b" path="res://entities/interactions/letter/letter.gd" id="1_y3g3p"]
+[ext_resource type="Texture2D" uid="uid://beqlxk5kdxuin" path="res://assets/ui/grunge-paper-background (Pixelized).jpg" id="3_p3v0h"]
+[ext_resource type="FontFile" uid="uid://c6ru82xe18d6j" path="res://assets/fonts/BoldPixels1.4.ttf" id="3_tov30"]
+[ext_resource type="Theme" uid="uid://c7k57134accys" path="res://resources/themes/main_menu_buttons.theme" id="5_bxj2w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tov30"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bxj2w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_78ts3"]
+line_spacing = 5.0
+paragraph_spacing = 5.0
+font = ExtResource("3_tov30")
+font_size = 32
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Letter" type="StaticBody2D" groups=["Interaction"]]
+process_mode = 3
+collision_layer = 8
+collision_mask = 4096
+script = ExtResource("1_y3g3p")
+visiblityNotifier = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tov30")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bxj2w")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+scale = Vector2(50, 50)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="VisibleOnScreenNotifier2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.529412)
+
+[node name="TextureRect" type="TextureRect" parent="UI/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -476.0
+offset_right = 376.0
+offset_bottom = 484.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_p3v0h")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -412.0
+offset_right = 384.0
+offset_bottom = 388.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "sdfsfddsfsdf"
+label_settings = SubResource("LabelSettings_78ts3")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 4
+
+[node name="Quit" type="Button" parent="UI/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -136.0
+offset_right = 128.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_bxj2w")
+text = "Quit"
+
+[connection signal="pressed" from="UI/Control/Quit" to="." method="_on_quit_pressed"]
