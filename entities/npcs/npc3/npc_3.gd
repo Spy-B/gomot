@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var runtime_vars: Dictionary = {
-	"movementWeight": 0.2,
+	"movement_weight": 0.6,
 	"health": 100,
 	"player_detected": false,
 	"cool_down": false,
@@ -29,8 +29,8 @@ var states_history: Array = []
 @export_category("NPC Abilities")
 
 @export_group("Movement Ability")
-@export var walkSpeed: int = 100
-@export var runSpeed: int = 200
+@export var flightSpeed: int = 100
+@export var chaseSpeed: int = 200
 var dir: int = 1
 
 @export_group("Shooting Ability")
@@ -54,7 +54,7 @@ var dir: int = 1
 
 @onready var w_ray_cast: RayCast2D = $Sprite2D/RayCasts/WRayCast
 @onready var shoot_ray_cast: RayCast2D = $Sprite2D/RayCasts/ShootRayCast
-@onready var player_detector: RayCast2D = $Sprite2D/RayCasts/PlayerDetector
+@onready var flying_altitud: RayCast2D = $Sprite2D/RayCasts/FlyingAltitude
 
 @onready var gun_barrel: Marker2D = $Sprite2D/GunBarrel
 
@@ -78,7 +78,6 @@ func _ready() -> void:
 			set_collision_mask_value(9, true)
 			
 			shoot_ray_cast.enabled = true
-			player_detector.enabled = true
 		
 		1:
 			self.add_to_group("Friendly")
@@ -92,7 +91,6 @@ func _ready() -> void:
 			
 			w_ray_cast.enabled = false
 			shoot_ray_cast.enabled = false
-			player_detector.enabled = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	npcs_state_machine.process_input(event)
@@ -102,9 +100,13 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	npcs_state_machine.process_frame(delta)
-	
-	if player_detector.get_collider() == Global.player:
+
+
+func _on_player_detector_body_entered(body: Node2D) -> void:
+	if body == Global.player:
 		runtime_vars.player_detected = true
 		runtime_vars.cool_down = false
-	else:
+
+func _on_player_detector_body_exited(body: Node2D) -> void:
+	if body == Global.player:
 		runtime_vars.player_detected = false

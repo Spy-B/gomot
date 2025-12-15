@@ -10,10 +10,30 @@ func enter() -> void:
 	parent.states_history.append(self)
 	
 	cooldown_period_timer.wait_time = cooldownPeriod
-	
-	parent.player_detector.target_position.x = 300.0
 
 func process_input(_event: InputEvent) -> NPCsState:
+	return null
+
+func process_frame(_delta: float) -> NPCsState:
+	if parent.runtime_vars.damaged:
+		return parent.damagingState
+
+	if parent.flying_altitud.global_transform.origin.distance_to(parent.flying_altitud.get_collision_point()) > parent.flying_altitud.target_position.y + 20.0:
+		parent.velocity.y = parent.flightSpeed
+	elif parent.flying_altitud.global_transform.origin.distance_to(parent.flying_altitud.get_collision_point()) < parent.flying_altitud.target_position.y - 20.0:
+		parent.velocity.y = parent.flightSpeed * -1
+	else:
+		parent.velocity.y = 0
+	
+	parent.shoot_ray_cast.look_at(Global.player.global_position)
+	gun_barrel.look_at(Global.player.global_position)
+	
+	if parent.shoot_ray_cast.get_collider() == Global.player:
+		return parent.shootingState
+	
+	if !parent.runtime_vars.player_detected: 
+		return parent.cooldownState
+	
 	return null
 
 func process_physics(_delta: float) -> NPCsState:
@@ -24,21 +44,9 @@ func process_physics(_delta: float) -> NPCsState:
 	elif parent.runtime_vars.player_pos < Vector2(0, 0):
 		parent.dir = -1
 	
-	parent.velocity.x = parent.walkSpeed * parent.dir
+	parent.velocity.x = parent.flightSpeed * parent.dir
 	sprite.scale.x = abs(sprite.scale.x) * parent.dir
 	
 	parent.move_and_slide()
-	
-	return null
-
-func process_frame(_delta: float) -> NPCsState:
-	if parent.runtime_vars.damaged:
-		return parent.damagingState
-	
-	if parent.shoot_ray_cast.get_collider() == Global.player:
-		return parent.shootingState
-	
-	if !parent.runtime_vars.player_detected: 
-		return parent.cooldownState
 	
 	return null

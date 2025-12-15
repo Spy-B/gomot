@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://cmdo4y67uis4f"]
 
-[ext_resource type="Script" path="res://entities/npcs/npc1/npc_1.gd" id="1_e8lvv"]
+[ext_resource type="Script" uid="uid://bj3uho672bvem" path="res://entities/npcs/npc1/npc_1.gd" id="1_e8lvv"]
 [ext_resource type="Shader" uid="uid://dmn0dmxfshr1d" path="res://resources/shaders/hit_flash.gdshader" id="2_5dkjo"]
 [ext_resource type="Texture2D" uid="uid://j5b72bfewmqr" path="res://assets/characters/npcs/enemies/Prototype/No Outlines/players green x1.png" id="2_jwyqi"]
 [ext_resource type="PackedScene" uid="uid://cmbpwc3svcncr" path="res://entities/npcs/npcs_state_machine.tscn" id="2_tklva"]

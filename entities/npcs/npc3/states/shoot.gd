@@ -15,6 +15,9 @@ func process_frame(_delta: float) -> NPCsState:
 	if parent.runtime_vars.damaged:
 		return parent.damagingState
 	
+	parent.shoot_ray_cast.look_at(Global.player.global_position)
+	gun_barrel.look_at(Global.player.global_position)
+
 	if !parent.shoot_ray_cast.get_collider() == Global.player && parent.runtime_vars.health > 0:
 		return parent.idleState
 	
@@ -24,7 +27,7 @@ func process_frame(_delta: float) -> NPCsState:
 	return null
 
 func process_physics(_delta: float) -> NPCsState:
-	parent.velocity.x = lerp(parent.velocity.x, 0.0, parent.runtime_vars.movementWeight)
+	parent.velocity.x = lerp(parent.velocity.x, 0.0, parent.runtime_vars.movement_weight)
 	
 	parent.move_and_slide()
 	

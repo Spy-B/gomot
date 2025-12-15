@@ -13,6 +13,9 @@ func enter() -> void:
 func process_frame(_delta: float) -> NPCsState:
 	if parent.runtime_vars.damaged:
 		return parent.damagingState
+
+	parent.shoot_ray_cast.look_at(Global.player.global_position)
+	gun_barrel.look_at(Global.player.global_position)
 	
 	if parent.runtime_vars.player_detected:
 		return parent.chasingState
@@ -29,16 +32,16 @@ func process_physics(_delta: float) -> NPCsState:
 		parent.dir = 1
 	elif parent.runtime_vars.player_pos < Vector2(0, 0):
 		parent.dir = -1
+
+	parent.velocity.x = parent.flightSpeed * parent.dir
+	sprite.scale.x = abs(sprite.scale.x) * parent.dir
 	
-		parent.move_and_slide()
-	else:
-		return parent.idleState
+	parent.move_and_slide()
 	
 	return null
 
 
 func _on_cooldown_period_timer_timeout() -> void:
-	parent.player_detector.target_position.x = 250.0
 	parent.runtime_vars.cool_down = true
 	
 	cooldown_period_timer.stop()

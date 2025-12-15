@@ -19,21 +19,17 @@ func enter() -> void:
 func process_input(_event: InputEvent) -> NPCsState:
 	return null
 
-func process_physics(_delta: float) -> NPCsState:
-	# if !parent.is_on_floor():
-	# 	parent.velocity.y += gravity * delta
-	
-	parent.velocity.x = parent.walkSpeed * parent.dir
-	sprite.scale.x = abs(sprite.scale.x) * parent.dir
-	
-	parent.move_and_slide()
-	
-	return null
-
 func process_frame(_delta: float) -> NPCsState:
 	if parent.runtime_vars.damaged:
 		return parent.damagingState
 	
+	if parent.flying_altitud.global_transform.origin.distance_to(parent.flying_altitud.get_collision_point()) > parent.flying_altitud.target_position.y + 20.0:
+		parent.velocity.y = parent.flightSpeed
+	elif parent.flying_altitud.global_transform.origin.distance_to(parent.flying_altitud.get_collision_point()) < parent.flying_altitud.target_position.y - 20.0:
+		parent.velocity.y = parent.flightSpeed * -1
+	else:
+		parent.velocity.y = 0
+
 	if change_state:
 		return parent.idleState
 	
@@ -43,5 +39,12 @@ func process_frame(_delta: float) -> NPCsState:
 	if parent.runtime_vars.player_detected:
 		return parent.chasingState
 		
+	return null
+
+func process_physics(_delta: float) -> NPCsState:
+	parent.velocity.x = parent.flightSpeed * parent.dir
+	sprite.scale.x = abs(sprite.scale.x) * parent.dir
+	
+	parent.move_and_slide()
 	
 	return null

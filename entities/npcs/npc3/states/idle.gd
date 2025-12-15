@@ -14,14 +14,6 @@ func enter() -> void:
 	parent.runtime_vars.waiting_time = randf_range(1, 3)
 	get_tree().create_timer(parent.runtime_vars.waiting_time).timeout.connect(func() -> void: change_state = true)
 
-func process_physics(_delta: float) -> NPCsState:
-	parent.velocity.x = lerp(parent.velocity.x, 0.0, parent.runtime_vars.movementWeight)
-	sprite.scale.x = abs(sprite.scale.x) * parent.dir
-	
-	parent.move_and_slide()
-	
-	return null
-
 func process_frame(_delta: float) -> NPCsState:
 	match parent.NpcType:
 		0:
@@ -46,5 +38,13 @@ func process_frame(_delta: float) -> NPCsState:
 			
 			if Global.player.runtime_vars.start_dialogue:
 				return parent.talkingState
+	
+	return null
+
+func process_physics(_delta: float) -> NPCsState:
+	parent.velocity.x = lerp(parent.velocity.x, 0.0, parent.runtime_vars.movement_weight)
+	sprite.scale.x = abs(sprite.scale.x) * parent.dir
+	
+	parent.move_and_slide()
 	
 	return null

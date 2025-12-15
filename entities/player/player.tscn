@@ -344,7 +344,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("idleState", "walkingState", "runningState", "startJumpingState", "jumpingState", "fallingState", "landingState", "dashingState", "attackingState", "shootingState", "reloadingState", "interactState", "talkingState", "damagingState", "deathState", "respawningState") groups=["Player"]]
 collision_layer = 256
-collision_mask = 458801
+collision_mask = 458803
 script = ExtResource("1_3wwtw")
 idleState = NodePath("UpperBodyMachine/Idle")
 walkingState = NodePath("UpperBodyMachine/Walk")

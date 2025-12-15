@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var runtime_vars: Dictionary = {
-	"movementWeight": 0.2,
+	"movement_weight": 0.2,
 	"health": 100,
 	"player_detected": false,
 	"cool_down": false,

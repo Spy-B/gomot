@@ -1,7 +1,6 @@
 extends State
 
 
-
 func enter() -> void:
 	print("[State] -> Running")
 	super()

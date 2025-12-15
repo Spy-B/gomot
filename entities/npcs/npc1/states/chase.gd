@@ -16,6 +16,18 @@ func enter() -> void:
 func process_input(_event: InputEvent) -> NPCsState:
 	return null
 
+func process_frame(_delta: float) -> NPCsState:
+	if parent.runtime_vars.damaged:
+		return parent.damagingState
+	
+	if parent.shoot_ray_cast.get_collider() == Global.player:
+		return parent.shootingState
+	
+	if !parent.runtime_vars.player_detected: 
+		return parent.cooldownState
+	
+	return null
+
 func process_physics(delta: float) -> NPCsState:
 	if !parent.is_on_floor():
 		parent.velocity.y += gravity * delta
@@ -31,17 +43,5 @@ func process_physics(delta: float) -> NPCsState:
 	sprite.scale.x = abs(sprite.scale.x) * parent.dir
 	
 	parent.move_and_slide()
-	
-	return null
-
-func process_frame(_delta: float) -> NPCsState:
-	if parent.runtime_vars.damaged:
-		return parent.damagingState
-	
-	if parent.shoot_ray_cast.get_collider() == Global.player:
-		return parent.shootingState
-	
-	if !parent.runtime_vars.player_detected: 
-		return parent.cooldownState
 	
 	return null

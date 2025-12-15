@@ -265,7 +265,7 @@ position = Vector2(1155, 932)
 dialogueJson = ExtResource("26_peixd")
 
 [node name="NPC3" parent="NPCs/Enemies" instance=ExtResource("27_s2hgx")]
-position = Vector2(418, 876)
+position = Vector2(687, 846)
 
 [node name="Friendly" type="Node2D" parent="NPCs"]
 
