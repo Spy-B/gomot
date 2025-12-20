@@ -19,7 +19,7 @@ func process_frame(_delta: float) -> NPCsState:
 	gun_barrel.look_at(Global.player.global_position)
 
 	if !parent.shoot_ray_cast.get_collider() == Global.player && parent.runtime_vars.health > 0:
-		return parent.idleState
+		return parent.chasingState
 	
 	#if parent.ammoInMag <= 0:
 		#return reloadingState
@@ -28,6 +28,15 @@ func process_frame(_delta: float) -> NPCsState:
 
 func process_physics(_delta: float) -> NPCsState:
 	parent.velocity.x = lerp(parent.velocity.x, 0.0, parent.runtime_vars.movement_weight)
+
+	parent.runtime_vars.player_pos = (Global.player.global_position - parent.global_position).normalized()
+
+	if parent.runtime_vars.player_pos > Vector2(0, 0):
+		parent.dir = 1
+	elif parent.runtime_vars.player_pos < Vector2(0, 0):
+		parent.dir = -1
+
+	sprite.scale.x = abs(sprite.scale.x) * parent.dir
 	
 	parent.move_and_slide()
 	

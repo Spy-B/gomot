@@ -30,7 +30,7 @@ var states_history: Array = []
 
 @export_group("Movement Ability")
 @export var flightSpeed: int = 100
-@export var chaseSpeed: int = 200
+@export var chaseSpeed: int = 300
 var dir: int = 1
 
 @export_group("Shooting Ability")

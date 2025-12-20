@@ -16,7 +16,7 @@ func process_frame(_delta: float) -> NPCsState:
 		return parent.damagingState
 	
 	if !parent.shoot_ray_cast.get_collider() == Global.player && parent.runtime_vars.health > 0:
-		return parent.idleState
+		return parent.chasingState
 	
 	#if parent.ammoInMag <= 0:
 		#return reloadingState
